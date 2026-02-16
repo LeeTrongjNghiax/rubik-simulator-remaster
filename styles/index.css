@@ -1,0 +1,9 @@
+@layer settings, tools, generic, elements, objects, components, utilities;
+
+@import "./settings/settings.css";
+@import "./tools/tools.css";
+@import "./generic/generic.css";
+@import "./elements/elements.css";
+@import "./objects/objects.css";
+@import "./components/components.css";
+@import "./utilities/utilities.css";

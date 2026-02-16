@@ -1,0 +1,137 @@
+@layer elements {
+  body {
+    color: var(--color-foreground);
+    background-color: var(--color-background);
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-weight: 700;
+    line-height: 1.2;
+    font-family: var(--font-secondary);
+  }
+
+  p {
+    margin-bottom: 0;
+    font-family: var(--font-primary);
+    font-size: 16px;
+  }
+
+  legend {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    line-height: 1.2;
+
+    font-size: 18px;
+
+    @media (1024px <= width) {
+      font-size: 20px;
+    }
+  }
+
+  label {
+    font-family: var(--font-primary);
+    font-weight: 500;
+    line-height: 1.2;
+    user-select: none;
+
+    font-size: 16px;
+
+    @media (1024px <= width) {
+      font-size: 18px;
+    }
+  }
+
+  a {
+    font-size: 20px;
+    color: var(--color-foreground);
+    font-weight: 600;
+    font-family: var(--font-primary);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+
+  a:hover {
+    color: var(--color-secondary);
+  }
+
+  input[type="number"] {
+    appearance: textfield;
+    -moz-appearance: textfield;
+    border: 1px solid var(--color-border);
+    font-family: var(--font-primary);
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-foreground);
+    width: min-content;
+    min-width: 60px;
+    width: 60px;
+    text-align: center;
+
+    @media (1024px <= width) {
+      font-size: 18px;
+    }
+  }
+
+  input[type="number"]::-webkit-outer-spin-button,
+  input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+
+  ::-webkit-scrollbar {
+    width: 4px;
+
+    @media (1024px <= width) {
+      width: 8px;
+    }
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #000;
+    border: 1px solid var(--color-border);
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background: var(--color-foreground);
+    transition: all 0.3s;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background: var(--color-secondary);
+  }
+
+
+  input[type="checkbox"] {
+    accent-color: var(--color-primary);
+    width: 18px;
+    aspect-ratio: 1 / 1;
+    margin-block: 10px;
+
+    @media (1024px <= width) {
+      width: 24px;
+    }
+  }
+
+  select {
+    border: 1px solid var(--color-border);
+    font-family: var(--font-primary);
+    border-radius: 5px;
+    background-color: transparent;
+    padding: 5px 10px;
+    font-size: 16px;
+    font-weight: 400;
+    color: var(--color-foreground);
+    text-align: center;
+
+    @media (1024px <= width) {
+      font-size: 18px;
+    }
+  }
+
+  option {
+    background-color: var(--color-background);
+    border: none;
+  }
+}

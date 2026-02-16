@@ -1,0 +1,9 @@
+@layer tools {
+  .t-show-all {
+    border: 1px solid red;
+  }
+
+  *:has(.t-show-all) {
+    border: 1px solid red;
+  }
+}

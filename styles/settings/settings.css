@@ -1,0 +1,29 @@
+@layer settings {
+  @font-face {
+    font-family: 'Quicksand';
+    src: url('../../fonts/Quicksand-VariableFont_wght.ttf') format('truetype');
+    font-weight: 300 700;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  @font-face {
+    font-family: 'DFVN Berfilem';
+    src: url('../../fonts/DFVN Berfilem.otf') format('opentype');
+    font-weight: 400;
+    font-style: normal;
+    font-display: swap;
+  }
+
+  :root {
+    --color-primary: red;
+    --color-secondary: #03830e;
+    --color-foreground: #fff;
+    --color-background: #000;
+    --color-card: #121212;
+    --color-border: #333;
+    --color-placeholder: #666;
+    --font-primary: 'Quicksand', sans-serif;
+    --font-secondary: 'DFVN Berfilem', sans-serif;
+  }
+}
