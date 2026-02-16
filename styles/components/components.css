@@ -151,13 +151,13 @@
   .c-form__fieldset-container {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 24px;
     overflow-y: auto;
     scrollbar-gutter: stable;
     padding-right: 10px;
 
     @media (1024px <= width) {
-      gap: 20px;
+      gap: 30px;
     }
   }
 
@@ -165,10 +165,14 @@
     border: none;
     display: flex;
     flex-direction: column;
-    gap: 5px;
+    border-bottom: 1px solid var(--color-border);
+
+    gap: 10px;
+    padding-bottom: 24px;
 
     @media (1024px <= width) {
-      gap: 10px;
+      gap: 20px;
+      padding-bottom: 30px;
     }
   }
 
@@ -181,11 +185,16 @@
   }
 
   .c-form__input-group {
-    --grid-template-columns: minmax(min-content, 90px) 1fr;
+    --grid-template-columns: 1fr;
+    --grid-template-columns\@1024: minmax(min-content, 120px) 1fr;
     display: grid;
     grid-template-columns: var(--grid-template-columns);
     align-items: center;
     gap: 10px;
+
+    @media (1024px <= width) {
+      grid-template-columns: var(--grid-template-columns\@1024);
+    }
   }
   
   .c-sidebar--left {

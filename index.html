@@ -1484,28 +1484,40 @@
               Rendering
             </legend>
 
-            <div class="c-form__input-group">
+            <div 
+              class="c-form__input-group"
+              style="
+                --grid-template-columns: 1fr auto;
+                --grid-template-columns\@1024: 1fr auto;
+              "
+            >
+              <label for="is-render-stickers">Is Render Stickers</label>
+
               <input
                 type="checkbox"
                 id="is-render-stickers"
                 name="is-render-stickers"
                 class="c-form__input-checkbox"
               >
-
-              <label for="is-render-stickers">Is Render Stickers</label>
             </div>
 
-            <div class="c-form__input-group">
+            <div
+              class="c-form__input-group"
+              style="
+                --grid-template-columns: 1fr auto;
+                --grid-template-columns\@1024: 1fr auto;
+              "
+            >
+              <label for="is-render-inner-outer-cubes">
+                Is Render Inner Outer Cubes
+              </label>
+
               <input
                 type="checkbox"
                 id="is-render-inner-outer-cubes"
                 name="is-render-inner-outer-cubes"
                 class="c-form__input-checkbox"
               >
-
-              <label for="is-render-inner-outer-cubes">
-                Is Render Inner Outer Cubes
-              </label>
             </div>
 
             <div class="c-form__input-group">
@@ -1573,7 +1585,7 @@
 
             <div
               class="c-form__input-group"
-              style="--grid-template-columns: 1fr;"
+              style="--grid-template-columns\@1024: 1fr;"
             >
               <label for="smooth-rotation-per-frame">
                 Smooth Rotation Per Frame:
@@ -1617,7 +1629,7 @@
 
             <div
               class="c-form__input-group"
-              style="--grid-template-columns: 1fr;"
+              style="--grid-template-columns\@1024: 1fr;"
             >
               <label for="angle-rotated-ratio-per-frame">
                 Angle Rotated Ratio Per Frame:
