@@ -5,12 +5,14 @@ import hexToNormalizeRgb from "./hex-to-normalize-rgb.js";
 import readTextFile from "./read-text-file.js";
 import roundTo from "./round-to.js";
 import * as maths from "./maths/index.js";
+import hexColorToUnitColor from "./hex-color-to-unit-color.js";
 
 export {
   axisStringToNumber,
   clamp,
   getRandomInteger,
   hexToNormalizeRgb,
+  hexColorToUnitColor,
   readTextFile,
   roundTo,
   maths,

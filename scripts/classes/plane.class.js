@@ -10,7 +10,7 @@ class Plane {
    * @property {number} b - 
    * @property {number} c - 
    * @property {number} d - 
-   * @property {Color} [color=new Color()] - 
+   * @property {Color} [color=new Color({})] - 
    * @property {string} [colorName=""] - 
    * @property {number} [center=0] - 
    * 
@@ -26,7 +26,7 @@ class Plane {
     b = 0,
     c = 0,
     d = 0,
-    color = new Color(),
+    color = new Color({}),
     colorName = "",
     center = 0
   }) {

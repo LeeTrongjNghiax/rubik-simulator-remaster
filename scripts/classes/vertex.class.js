@@ -21,16 +21,6 @@ class Vertex {
   }
 
   /**
-   * @returns {Position}
-   * 
-   * @author 
-   * LeeTrongjNghiax <leetrongjnghiax0938225745@gmail.com>
-   */
-  get relativePosition() {
-    return this.relativePosition;
-  }
-
-  /**
    * This is used for generating all the vertices of the face.
    * 
    * @returns {string[]}

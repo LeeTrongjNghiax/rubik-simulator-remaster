@@ -1,27 +1,30 @@
 /**
+ * @async
  * @function
  * 
  * @param {string | URL} file - 
  * 
- * @returns {string | null}
+ * @returns {Promise<string>}
  */
-const readTextFile = (file) => {
-  const rawFile = new XMLHttpRequest();
+const readTextFile = async (file) => {
+  return new Promise((resolve, reject) => {
+    const rawFile = new XMLHttpRequest();
 
-  rawFile.open("GET", file, false);
-  rawFile.onreadystatechange = () => {
-    if (rawFile.readyState === 4) {
-      if (rawFile.status === 200 || rawFile.status === 0) {
-        const allText = rawFile.responseText;
+    rawFile.open("GET", file, true);
+    rawFile.onreadystatechange = () => {
+      if (rawFile.readyState === 4) {
+        if (rawFile.status === 200 || rawFile.status === 0) {
+          const allText = rawFile.responseText;
 
-        console.log(allText);
+          resolve(allText);
+        }
 
-        return allText;
+        reject(new Error(`Failed to read text file`));
       }
     }
-  }
 
-  rawFile.send(null);
+    rawFile.send(null);
+  });
 };
 
 export default readTextFile;

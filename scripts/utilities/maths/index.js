@@ -6,6 +6,7 @@ import fromRotation from "./from-rotation.js";
 import getDotProductOfPlaneAndVector from "./get-dot-product-of-plane-and-vector.js";
 import getIdentityMatrixSizeFour from "./get-identity-matrix-size-four.js";
 import getPlaneFromThreePoints from "./get-plane-from-three-points.js";
+import identity from "./identity.js";
 import invertQuaternion from "./invert-quarternion.js";
 import invert from "./invert.js";
 import length from "./length.js";
@@ -30,6 +31,7 @@ export {
   getDotProductOfPlaneAndVector,
   getIdentityMatrixSizeFour,
   getPlaneFromThreePoints,
+  identity,
   invertQuaternion,
   invert,
   length,

@@ -6,6 +6,7 @@ class Face {
    * @property {Vertex[]} [vertices=[]] - 
    * @property {Position} [absolutePosition=new Position(0, 0, 0)] - This absolute position does NOT related to the face.
    * @property {Color} [color=new Color()] - Technically all the vertices will defined the color of this face.
+   * @property {string} [colorName=""] - 
    * 
    * @param {FaceParameters} parameters - 
    * 
@@ -16,10 +17,12 @@ class Face {
     vertices = [],
     absolutePosition = new Position(),
     color = new Color(),
+    colorName = "",
   }) {
     this.vertices = vertices;
     this.absolutePosition = absolutePosition;
     this.color = color;
+    this.colorName = colorName;
   }
 
   /**
@@ -30,26 +33,6 @@ class Face {
    */
   addVertex(vertex) {
     this.vertices.push(vertex);
-  }
-
-  /**
-   * @returns {Color}
-   * 
-   * @author 
-   * LeeTrongjNghiax <leetrongjnghiax0938225745@gmail.com>
-   */
-  get color() {
-    return this.color;
-  }
-
-  /**
-   * @returns {Position}
-   * 
-   * @author 
-   * LeeTrongjNghiax <leetrongjnghiax0938225745@gmail.com>
-   */
-  get absolutePosition() {
-    return this.absolutePosition;
   }
 
   /**

@@ -26,16 +26,6 @@ class Cubie {
   }
 
   /**
-   * @returns {Position}
-   * 
-   * @author 
-   * LeeTrongjNghiax <leetrongjnghiax0938225745@gmail.com>
-   */
-  get absolutePosition() {
-    return this.absolutePosition;
-  }
-
-  /**
    * This is used for generating all the vertices of the cubie.
    * 
    * @returns {string[]}
