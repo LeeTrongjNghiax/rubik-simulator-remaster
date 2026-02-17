@@ -48,11 +48,21 @@ class Control {
   checkIfControlThisVertex(vertex = new Position()) {
     const dis1 = getDotProductOfPlaneAndVector(
       vertex,
-      new Plane(this.axis.x, this.axis.y, this.axis.z, this.lower_limit)
+      new Plane({
+        a: this.axis.x,
+        b: this.axis.y,
+        c: this.axis.z,
+        d: this.lowerLimit,
+      })
     );
     const dis2 = getDotProductOfPlaneAndVector(
       vertex,
-      new Plane(this.axis.x, this.axis.y, this.axis.z, this.upper_limit)
+      new Plane({
+        a: this.axis.x,
+        b: this.axis.y,
+        c: this.axis.z,
+        d: this.upperLimit,
+      })
     );
 
     const sign1 = Math.sign(dis1);

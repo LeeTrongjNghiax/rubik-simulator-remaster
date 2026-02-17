@@ -10,7 +10,6 @@ import createVerticesFromThreeIntersectedPlanes from "../../../scripts/utilities
 import createInnerVerticesFromThreeIntersectedPlanes from "../../../scripts/utilities/twisty-puzzles/create-inner-vertices-from-three-intersected-planes.js";
 import addTwistyPuzzleRotationControlSet from "../../../scripts/utilities/twisty-puzzles/add-twisty-puzzle-rotation-control-set.js";
 import addFacesToTwistyPuzzle from "../../../scripts/utilities/twisty-puzzles/add-faces-to-twisty-puzzle.js";
-import createVertices from "../../../scripts/utilities/twisty-puzzles/create-vertices.js";
 import setUpWebGL from "../../../scripts/utilities/canvas/set-up-web-gl.js";
 import createWebGLShaders from "../../../scripts/utilities/canvas/create-web-gl-shaders.js";
 import readTextFile from "../../../scripts/utilities/read-text-file.js";
@@ -21,19 +20,20 @@ import setUpShaderAttribute from "../../../scripts/utilities/canvas/set-up-shade
 import getUniformsInShader from "../../../scripts/utilities/canvas/get-uniforms-in-shader.js";
 import createSupportMatrix from "../../../scripts/utilities/canvas/create-support-matrix.js";
 import addUniformsToShader from "../../../scripts/utilities/canvas/add-uniforms-to-shader.js";
+import createVertices from "../../../scripts/utilities/twisty-puzzles/create-vertices.js";
+import degreeToRadian from "../../../scripts/utilities/maths/degree-to-radian.js";
 
-const createTwistyPuzzle = async (event) => {
-  event.preventDefault();
-
+const createTwistyPuzzle = async (form) => {
   const canvas = document.querySelector(`.c-main__canvas`);
 
   if (!canvas) throw new Error(`Canvas not found`);
 
+  canvas.width = 500;
+  canvas.height = 500;
+
   const gl = createWebGLRenderingContext(canvas);
 
-  const formData = new FormData(event.target);
-
-  // console.log(Object.fromEntries(formData));
+  const formData = new FormData(form);
 
   resetWebGL({
     webGLContext: gl,
@@ -85,12 +85,14 @@ const createTwistyPuzzle = async (event) => {
     startDepth: startOfZ,
     endDepth: endOfZ,
   });
-  
+
   const planeMatrix = createPlaneMatrixFromRotationAxes({
     axisRotationX: +formData.get(`sticker-container-rotation-x`) ?? 0,
     axisRotationY: +formData.get(`sticker-container-rotation-y`) ?? 0,
     axisRotationZ: +formData.get(`sticker-container-rotation-z`) ?? 0,
   });
+
+  console.log(Object.fromEntries(formData));
 
   const [planesX, planesY, planesZ] = createStickerPlanes({
     planeMatrix,
@@ -106,18 +108,18 @@ const createTwistyPuzzle = async (event) => {
     twistyPuzzleCubieHalfLength: cubieHalfLength,
     stickerGap: +formData.get(`sticker-gap`) ?? 0,
     stickerSize: +formData.get(`sticker-size`) ?? 0.95,
-    stickerTopColor: formData.get(`sticker-top-color`) ? hexColorToUnitColor(formData.get(`sticker-top-color`)) : [1, 1, 1],
-    stickerBottomColor: formData.get(`sticker-bottom-color`) ? hexColorToUnitColor(formData.get(`sticker-bottom-color`)) : [1, 1, 0], 
-    stickerFrontColor: formData.get(`sticker-front-color`) ? hexColorToUnitColor(formData.get(`sticker-front-color`)) : [0, 1, 1],
-    stickerBackColor: formData.get(`sticker-back-color`) ? hexColorToUnitColor(formData.get(`sticker-back-color`)) : [0, 0, 1],
-    stickerRightColor: formData.get(`sticker-right-color`) ? hexColorToUnitColor(formData.get(`sticker-right-color`)) : [1, 0, 0],
-    stickerLeftColor: formData.get(`sticker-left-color`) ? hexColorToUnitColor(formData.get(`sticker-left-color`)) : [1, 0.65, 0],
-    stickerInnerTopColor: formData.get(`sticker-inner-top-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-top-color`)) : [1, 1, 1],
-    stickerInnerBottomColor: formData.get(`sticker-inner-bottom-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-bottom-color`)) : [1, 1, 0],
-    stickerInnerFrontColor: formData.get(`sticker-inner-front-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-front-color`)) : [0, 1, 1],
-    stickerInnerBackColor: formData.get(`sticker-inner-back-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-back-color`)) : [0, 0, 1],
-    stickerInnerRightColor: formData.get(`sticker-inner-right-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-right-color`)) : [1, 0, 0],
-    stickerInnerLeftColor: formData.get(`sticker-inner-left-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-left-color`)) : [1, 0.65, 0],
+    stickerTopColor: formData.get(`sticker-color-up`) ? hexColorToUnitColor(formData.get(`sticker-color-up`)) : [1, 1, 1],
+    stickerBottomColor: formData.get(`sticker-color-down`) ? hexColorToUnitColor(formData.get(`sticker-color-down`)) : [1, 1, 0], 
+    stickerFrontColor: formData.get(`sticker-color-front`) ? hexColorToUnitColor(formData.get(`sticker-color-front`)) : [0, 1, 0],
+    stickerBackColor: formData.get(`sticker-color-back`) ? hexColorToUnitColor(formData.get(`sticker-color-back`)) : [0, 0, 1],
+    stickerRightColor: formData.get(`sticker-color-right`) ? hexColorToUnitColor(formData.get(`sticker-color-right`)) : [1, 0, 0],
+    stickerLeftColor: formData.get(`sticker-color-left`) ? hexColorToUnitColor(formData.get(`sticker-color-left`)) : [.65, .65, .65],
+    stickerInnerTopColor: formData.get(`inner-cube-outer-color-up`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-up`)) : [.65, .65, .65],
+    stickerInnerBottomColor: formData.get(`inner-cube-outer-color-down`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-down`)) : [.65, .65, .65],
+    stickerInnerFrontColor: formData.get(`inner-cube-outer-color-front`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-front`)) : [.65, .65, .65],
+    stickerInnerBackColor: formData.get(`inner-cube-outer-color-back`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-back`)) : [.65, .65, .65],
+    stickerInnerRightColor: formData.get(`inner-cube-outer-color-right`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-right`)) : [.65, .65, .65],
+    stickerInnerLeftColor: formData.get(`inner-cube-outer-color-left`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-left`)) : [.65, .65, .65],
     stickerColorTransparency: formData.get(`sticker-color-transparency`) ?? 1,
     stickerInnerColorTransparency: formData.get(`sticker-inner-color-transparency`) ?? 1,
   });
@@ -134,13 +136,13 @@ const createTwistyPuzzle = async (event) => {
     endDepth: endOfZ,
     translationZ: formData.get(`sticker-container-position-z`) ?? 0,
     twistyPuzzleCubieHalfLength: cubieHalfLength,
-    stickerInnerTopColor: formData.get(`sticker-inner-top-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-top-color`)) : [1, 1, 1],
-    stickerInnerBottomColor: formData.get(`sticker-inner-bottom-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-bottom-color`)) : [1, 1, 0],
-    stickerInnerFrontColor: formData.get(`sticker-inner-front-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-front-color`)) : [0, 1, 1],
-    stickerInnerBackColor: formData.get(`sticker-inner-back-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-back-color`)) : [0, 0, 1],
-    stickerInnerRightColor: formData.get(`sticker-inner-right-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-right-color`)) : [1, 0, 0],
-    stickerInnerLeftColor: formData.get(`sticker-inner-left-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-left-color`)) : [1, 0.65, 0],
-    stickerInnerColor: formData.get(`sticker-inner-color`) ? hexColorToUnitColor(formData.get(`sticker-inner-color`)) : [0.5, 0.5, 0.5],
+    stickerInnerTopColor: formData.get(`inner-cube-outer-color-up`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-up`)) : [.65, .65, .65],
+    stickerInnerBottomColor: formData.get(`inner-cube-outer-color-down`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-down`)) : [.65, .65, .65],
+    stickerInnerFrontColor: formData.get(`inner-cube-outer-color-front`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-front`)) : [.65, .65, .65],
+    stickerInnerBackColor: formData.get(`inner-cube-outer-color-back`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-back`)) : [.65, .65, .65],
+    stickerInnerRightColor: formData.get(`inner-cube-outer-color-right`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-right`)) : [.65, .65, .65],
+    stickerInnerLeftColor: formData.get(`inner-cube-outer-color-left`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-left`)) : [.65, .65, .65],
+    stickerInnerColor: formData.get(`inner-cube-outer-color`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color`)) : [.65, .65, .65],
     stickerInnerColorTransparency: formData.get(`sticker-inner-color-transparency`) ?? 1,
   });
 
@@ -206,19 +208,19 @@ const createTwistyPuzzle = async (event) => {
   } = getUniformsInShader(gl, shaderProgram);
 
   const { matWorld, matView, matProjection } = createSupportMatrix({
-    orientationX: +formData.get(`sticker-container-rotation-x`) ?? 0,
-    orientationY: +formData.get(`sticker-container-rotation-y`) ?? 0,
-    orientationZ: +formData.get(`sticker-container-rotation-z`) ?? 0,
-    cameraPositionX: +formData.get(`sticker-container-position-x`) ?? 0,
-    cameraPositionY: +formData.get(`sticker-container-position-y`) ?? 0,
-    cameraPositionZ: +formData.get(`sticker-container-position-z`) ?? 0,
-    cameraLookAtX: +formData.get(`sticker-container-position-x`) ?? 0,
-    cameraLookAtY: +formData.get(`sticker-container-position-y`) ?? 0,
-    cameraLookAtZ: +formData.get(`sticker-container-position-z`) ?? 0,
-    cameraUpX: +formData.get(`sticker-container-position-x`) ?? 0,
-    cameraUpY: +formData.get(`sticker-container-position-y`) ?? 0,
-    cameraUpZ: +formData.get(`sticker-container-position-z`) ?? 0,
-    fieldOfView: +formData.get(`field-of-view`) ?? 45,
+    orientationX: +formData.get(`cubie-orientation-x`) ?? 0,
+    orientationY: +formData.get(`cubie-orientation-y`) ?? 0,
+    orientationZ: +formData.get(`cubie-orientation-z`) ?? 0,
+    cameraPositionX: +formData.get(`camera-position-x`) ?? 0,
+    cameraPositionY: +formData.get(`camera-position-y`) ?? 0,
+    cameraPositionZ: +formData.get(`camera-position-z`) ?? -30,
+    cameraLookAtX: +formData.get(`camera-look-at-position-x`) ?? 0,
+    cameraLookAtY: +formData.get(`camera-look-at-position-y`) ?? 0,
+    cameraLookAtZ: +formData.get(`camera-look-at-position-z`) ?? 0,
+    cameraUpX: +formData.get(`camera-up-axis-x`) ?? 0,
+    cameraUpY: +formData.get(`camera-up-axis-y`) ?? 1,
+    cameraUpZ: +formData.get(`camera-up-axis-z`) ?? 0,
+    fieldOfView: +formData.get(`field-of-view`) ? degreeToRadian(+formData.get(`field-of-view`)) : 45,
     aspectRatio: canvas.width / canvas.height,
     nearPlane: +formData.get(`near-plane`) ?? 0.1,
     farPlane: +formData.get(`far-plane`) ?? 100,
@@ -236,14 +238,14 @@ const createTwistyPuzzle = async (event) => {
     pointSizeUniformLocation,
   });
 
-  // console.log(vertices, vertexIndices);
-
-  gl.drawElements(
-    gl.TRIANGLES, 
-    vertexIndices.length, 
-    gl.UNSIGNED_SHORT,
-    0
-  );
+  if (vertexIndices.length > 0) {
+    gl.drawElements(
+      gl.TRIANGLES,
+      vertexIndices.length,
+      gl.UNSIGNED_SHORT,
+      0,
+    );
+  }
 }
 
 const initiateForm = () => {
@@ -251,7 +253,15 @@ const initiateForm = () => {
 
   if (!form) throw new Error(`Form not found`);
 
-  form.addEventListener(`submit`, createTwistyPuzzle);
+  form.addEventListener(`submit`, (event) => {
+    event.preventDefault();
+    createTwistyPuzzle(form);
+  });
+
+  // form.addEventListener(`input`, (event) => {
+  //   event.preventDefault();
+  //   createTwistyPuzzle(form);
+  // });
 }
 
 document.addEventListener(`DOMContentLoaded`, initiateForm);

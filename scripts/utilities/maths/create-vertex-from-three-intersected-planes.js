@@ -47,10 +47,10 @@ const createVertexFromThreeIntersectedPlanes = ({
       y: resultVector[1], 
       z: resultVector[2],
     });
-    
+
     if ( twistyPuzzle.controls[i].checkIfControlThisVertex(vector) ) {
       const currentControl = twistyPuzzle.controls[i];
-
+      
       if (
         currentControl.axis.x !== 0 &&
         currentControl.axis.y === 0 &&

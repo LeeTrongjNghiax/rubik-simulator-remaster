@@ -37,7 +37,12 @@ const getPlaneFromThreePoints = (
 
   const d = -dot(normal, a0);
 
-  return new Plane(normal[0], normal[1], normal[2], d);
+  return new Plane({
+    a: normal[0],
+    b: normal[1],
+    c: normal[2],
+    d: d,
+  });
 }
 
 export default getPlaneFromThreePoints;
