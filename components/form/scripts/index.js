@@ -35,8 +35,8 @@ const createTwistyPuzzle = async (form) => {
 
   if (!canvas) throw new Error(`Canvas not found`);
 
-  canvas.width = formData.get(`canvas-resolution`) ?? 500;
-  canvas.height = formData.get(`canvas-resolution`) ?? 500;
+  canvas.width = +formData.get(`canvas-resolution`) ?? 500;
+  canvas.height = +formData.get(`canvas-resolution`) ?? 500;
 
   const gl = createWebGLRenderingContext(canvas);
 
@@ -125,8 +125,8 @@ const createTwistyPuzzle = async (form) => {
     stickerInnerBackColor: formData.get(`inner-cube-outer-color-back`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-back`)) : [.65, .65, .65],
     stickerInnerRightColor: formData.get(`inner-cube-outer-color-right`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-right`)) : [.65, .65, .65],
     stickerInnerLeftColor: formData.get(`inner-cube-outer-color-left`) ? hexColorToUnitColor(formData.get(`inner-cube-outer-color-left`)) : [.65, .65, .65],
-    stickerColorTransparency: formData.get(`sticker-color-transparency`) ?? 1,
-    stickerInnerColorTransparency: formData.get(`sticker-inner-color-transparency`) ?? 1,
+    stickerColorTransparency: +formData.get(`sticker-color-transparency`) ?? 1,
+    stickerInnerColorTransparency: +formData.get(`inner-cube-outer-color-transparency`) ?? 1,
   });
 
   const [innerPlanesX, innerPlanesY, innerPlanesZ] = createInnerCubiePlanes({

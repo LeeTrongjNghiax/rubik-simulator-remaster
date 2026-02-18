@@ -79,7 +79,7 @@
             </div>
           </fieldset>
 
-          <fieldset class="c-form__fieldset">
+          <fieldset class="c-form__fieldset u-hidden">
             <legend class="c-form__fieldset-legend">
               Sticker Container Dimensions
             </legend>
@@ -921,6 +921,45 @@
                 value="#ffa800"
               >
             </div>
+
+            <div class="c-form__input-group">
+              <label for="sticker-color-transparency">Transparency:</label>
+
+              <div class="c-slider-input u-flex-1">
+                <input
+                  type="number"
+                  id="sticker-color-transparency-lower-bound"
+                  name="sticker-color-transparency-lower-bound"
+                  class="c-slider-input__input-lower"
+                  step="0.01"
+                  value="0"
+                >
+
+                <div class="c-slider-input__input-range-container">
+                  <input
+                    type="range"
+                    id="sticker-color-transparency"
+                    name="sticker-color-transparency"
+                    class="c-slider-input__input-range"
+                    step="0.01"
+                    value="1"
+                  >
+
+                  <div class="c-slider-input__input-range-value">
+                    -
+                  </div>
+                </div>
+
+                <input
+                  type="number"
+                  id="sticker-color-transparency-upper-bound"
+                  name="sticker-color-transparency-upper-bound"
+                  class="c-slider-input__input-upper"
+                  step="0.01"
+                  value="1"
+                >
+              </div>
+            </div>
           </fieldset>
 
           <fieldset class="c-form__fieldset">
@@ -1016,6 +1055,45 @@
                 class="c-form__input-color"
                 value="#121212"
               >
+            </div>
+
+            <div class="c-form__input-group">
+              <label for="inner-cube-outer-color-transparency">Transparency:</label>
+
+              <div class="c-slider-input u-flex-1">
+                <input
+                  type="number"
+                  id="inner-cube-outer-color-transparency-lower-bound"
+                  name="inner-cube-outer-color-transparency-lower-bound"
+                  class="c-slider-input__input-lower"
+                  step="0.01"
+                  value="0"
+                >
+
+                <div class="c-slider-input__input-range-container">
+                  <input
+                    type="range"
+                    id="inner-cube-outer-color-transparency"
+                    name="inner-cube-outer-color-transparency"
+                    class="c-slider-input__input-range"
+                    step="0.01"
+                    value="1"
+                  >
+
+                  <div class="c-slider-input__input-range-value">
+                    -
+                  </div>
+                </div>
+
+                <input
+                  type="number"
+                  id="inner-cube-outer-color-transparency-upper-bound"
+                  name="inner-cube-outer-color-transparency-upper-bound"
+                  class="c-slider-input__input-upper"
+                  step="0.01"
+                  value="1"
+                >
+              </div>
             </div>
           </fieldset>
 
@@ -1142,7 +1220,7 @@
                     name="far-plane"
                     class="c-slider-input__input-range"
                     step="1"
-                    value="100"
+                    value="20"
                   >
 
                   <div class="c-slider-input__input-range-value">
