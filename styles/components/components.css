@@ -218,6 +218,10 @@
     aspect-ratio: 1 / 1;
     background-color: var(--color-card);
     border-radius: 10px;
+    resize: both;
+    overflow: auto;
+    max-height: 60vh;
+    max-width: 100%;
 
     @media (orientation: landscape) {
       flex: 1;
@@ -326,7 +330,6 @@
     color: #000;
     font-size: 18px;
     font-weight: 700;
-    padding: 5px 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: all .3s ease;
@@ -342,6 +345,7 @@
   }
 
   .c-controller-container__controller-button {
+    padding: 5px 10px;
     transition: all .3s ease;
     background-color: transparent;
     border: none;

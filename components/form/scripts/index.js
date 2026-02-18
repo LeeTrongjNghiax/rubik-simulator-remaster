@@ -1,4 +1,5 @@
 import { Rubik } from "../../../scripts/classes/index.js";
+import { EPSILON } from "../../../scripts/constants/index.js";
 import { hexColorToUnitColor } from "../../../scripts/utilities/index.js";
 import createWebGLRenderingContext from "../../../scripts/utilities/canvas/create-web-gl-rendering-context.js";
 import resetWebGL from "../../../scripts/utilities/canvas/reset-web-gl.js";
@@ -24,16 +25,22 @@ import createVertices from "../../../scripts/utilities/twisty-puzzles/create-ver
 import degreeToRadian from "../../../scripts/utilities/maths/degree-to-radian.js";
 
 const createTwistyPuzzle = async (form) => {
+  let isRotating = false;
+
+  const formData = new FormData(form);
+
+  if (!formData) throw new Error(`Form data not found`);
+
   const canvas = document.querySelector(`.c-main__canvas`);
 
   if (!canvas) throw new Error(`Canvas not found`);
 
-  canvas.width = 300;
-  canvas.height = 300;
+  canvas.width = formData.get(`canvas-resolution`) ?? 500;
+  canvas.height = formData.get(`canvas-resolution`) ?? 500;
+
+  // canvas.style.setProperty(`--size`, formData.get(`canvas-width`) ?? 500);
 
   const gl = createWebGLRenderingContext(canvas);
-
-  const formData = new FormData(form);
 
   resetWebGL({
     webGLContext: gl,
@@ -215,7 +222,7 @@ const createTwistyPuzzle = async (form) => {
     cameraPositionY: +formData.get(`camera-position-y`) ?? 0,
     cameraPositionZ: +formData.get(`camera-position-z`) ?? -30,
     cameraLookAtX: +formData.get(`camera-look-at-position-x`) ?? 0,
-    cameraLookAtY: +formData.get(`camera-look-at-position-y`) ?? 0,
+    cameraLookAtY: +formData.get(`camera-look-at-position-y`) ?? 1,
     cameraLookAtZ: +formData.get(`camera-look-at-position-z`) ?? 0,
     cameraUpX: +formData.get(`camera-up-axis-x`) ?? 0,
     cameraUpY: +formData.get(`camera-up-axis-y`) ?? 1,
@@ -265,6 +272,89 @@ const createTwistyPuzzle = async (form) => {
     if (!controllerButton) throw new Error(`Controller button not found`);
 
     controllerButton.textContent = control.name;
+
+    controllerButton.addEventListener(`click`, (e) => {
+      if (isRotating) return;
+
+      isRotating = true;
+
+      const control = rubik.controls.find(
+        (control) => control.name === e.target.textContent,
+      );
+
+      if (!control) return
+
+      let angleToRotate = 0;
+      const step = control.rad / 0.01;
+      let newVertices = [...vertices];
+      // let currentTime: number = Date.now();
+
+      const rotateInterval = setInterval(() => {
+        // const timePassed: number = Date.now() - currentTime;
+        // currentTime = Date.now();
+
+        // angleToRotate += step * timePassed / SECOND_TO_MILLISECOND;
+        angleToRotate += step;
+
+        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(newVertices), gl.STATIC_DRAW);
+
+        const axisVector = control.axis.position;
+
+        const planeA = [
+          axisVector[0],
+          axisVector[1],
+          axisVector[2],
+          control.lowerLimit,
+        ];
+
+        const planeB = [
+          axisVector[0],
+          axisVector[1],
+          axisVector[2],
+          control.upperLimit,
+        ];
+
+        gl.uniform3fv(axisVectorUniformLocation, axisVector);
+        gl.uniform4fv(planeAUniformLocation, planeA);
+        gl.uniform4fv(planeBUniformLocation, planeB);
+        gl.uniform1f(radUniformLocation, angleToRotate);
+
+        resetWebGL({
+          webGLContext: gl,
+          canvas,
+          backgroundColor: [0, 0, 0],
+        });
+
+        gl.drawElements(
+          gl.TRIANGLES, 
+          vertexIndices.length, 
+          gl.UNSIGNED_SHORT, 0
+        );
+
+        if ( Math.abs( angleToRotate - control.rad ) <= EPSILON ) {
+          rubik.rotateFace(
+            control.axis,
+            angleToRotate,
+            control.upperLimit,
+            control.lowerLimit,
+          );
+
+          newVertices = [
+            ...[].concat(
+              ...rubik.cubies.map(
+                (cubie) => cubie.toString()
+              )
+            )
+          ];
+
+          vertices = newVertices;
+          isRotating = false;
+          clearInterval(rotateInterval);
+        }
+      }, 1000);
+
+      console.log('rotating');
+    });
     
     controllerContainer.appendChild(clonedControllerTemplate);
   });
@@ -284,6 +374,8 @@ const initiateForm = () => {
     event.preventDefault();
     createTwistyPuzzle(form);
   });
+
+  createTwistyPuzzle(form);
 }
 
 document.addEventListener(`DOMContentLoaded`, initiateForm);
