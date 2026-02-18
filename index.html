@@ -57,6 +57,30 @@
         <div class="c-form__fieldset-container u-flex-1">
           <fieldset class="c-form__fieldset">
             <legend class="c-form__fieldset-legend">
+              Auto Update
+            </legend>
+
+            <div 
+              class="c-form__input-group"
+              style="
+                --grid-template-columns: 1fr auto;
+                --grid-template-columns\@1024: 1fr auto;
+              "
+            >
+              <label for="is-auto-update">Is Auto Update</label>
+
+              <input
+                type="checkbox"
+                id="is-auto-update"
+                name="is-auto-update"
+                class="c-form__input-checkbox"
+                checked
+              >
+            </div>
+          </fieldset>
+
+          <fieldset class="c-form__fieldset">
+            <legend class="c-form__fieldset-legend">
               Sticker Container Dimensions
             </legend>
 
@@ -562,7 +586,7 @@
                   name="cubie-orientation-x-lower-bound"
                   class="c-slider-input__input-lower"
                   step="0.01"
-                  value="-10"
+                  value="-3"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -588,7 +612,7 @@
                   name="cubie-orientation-x-upper-bound"
                   class="c-slider-input__input-upper"
                   step="0.01"
-                  value="10"
+                  value="3"
                 >
               </div>
             </div>
@@ -603,7 +627,7 @@
                   name="cubie-orientation-y-lower-bound"
                   class="c-slider-input__input-lower"
                   step="0.01"
-                  value="-10"
+                  value="-3"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -629,7 +653,7 @@
                   name="cubie-orientation-y-upper-bound"
                   class="c-slider-input__input-upper"
                   step="0.01"
-                  value="10"
+                  value="3"
                 >
               </div>
             </div>
@@ -644,7 +668,7 @@
                   name="cubie-orientation-z-lower-bound"
                   class="c-slider-input__input-lower"
                   step="0.01"
-                  value="-10"
+                  value="-3"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -668,7 +692,7 @@
                   name="cubie-orientation-z-upper-bound"
                   class="c-slider-input__input-upper"
                   step="0.01"
-                  value="10"
+                  value="3"
                 >
               </div>
             </div>
@@ -1093,7 +1117,7 @@
                   name="near-plane-upper-bound"
                   class="c-slider-input__input-upper"
                   step="0.1"
-                  value="1000"
+                  value="20"
                 >
               </div>
             </div>
@@ -1132,7 +1156,7 @@
                   name="far-plane-upper-bound"
                   class="c-slider-input__input-upper"
                   step="1"
-                  value="1000"
+                  value="100"
                 >
               </div>
             </div>
@@ -1165,7 +1189,7 @@
                   name="camera-position-x-lower-bound"
                   class="c-slider-input__input-lower"
                   step="1"
-                  value="-100"
+                  value="-20"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -1189,7 +1213,7 @@
                   name="camera-position-x-upper-bound"
                   class="c-slider-input__input-upper"
                   step="1"
-                  value="100"
+                  value="20"
                 >
               </div>
             </div>
@@ -1204,7 +1228,7 @@
                   name="camera-position-y-lower-bound"
                   class="c-slider-input__input-lower"
                   step="1"
-                  value="-100"
+                  value="-20"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -1228,7 +1252,7 @@
                   name="camera-position-y-upper-bound"
                   class="c-slider-input__input-upper"
                   step="1"
-                  value="100"
+                  value="20"
                 >
               </div>
             </div>
@@ -1243,7 +1267,7 @@
                   name="camera-position-z-lower-bound"
                   class="c-slider-input__input-lower"
                   step="1"
-                  value="-100"
+                  value="-20"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -1255,7 +1279,7 @@
                     step="1"
                     min="-100"
                     max="100"
-                    value="-12"
+                    value="-8"
                   >
 
                   <div class="c-slider-input__input-range-value">
@@ -1269,7 +1293,7 @@
                   name="camera-position-z-upper-bound"
                   class="c-slider-input__input-upper"
                   step="1"
-                  value="100"
+                  value="20"
                 >
               </div>
             </div>
@@ -1577,7 +1601,7 @@
                 <option value="line-strip">Line Strip</option>
                 <option value="triangle-strip">Triangle Strip</option>
                 <option value="triangle-fan">Triangle Fan</option>
-                <option value="triangles">Triangles</option>
+                <option value="triangles" selected>Triangles</option>
               </select>
             </div>
 
@@ -1601,7 +1625,7 @@
                     name="point-size"
                     class="c-slider-input__input-range"
                     step="1"
-                    value="1"
+                    value="10"
                   >
 
                   <div class="c-slider-input__input-range-value">

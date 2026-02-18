@@ -38,8 +38,6 @@ const createTwistyPuzzle = async (form) => {
   canvas.width = formData.get(`canvas-resolution`) ?? 500;
   canvas.height = formData.get(`canvas-resolution`) ?? 500;
 
-  // canvas.style.setProperty(`--size`, formData.get(`canvas-width`) ?? 500);
-
   const gl = createWebGLRenderingContext(canvas);
 
   resetWebGL({
@@ -246,8 +244,37 @@ const createTwistyPuzzle = async (form) => {
   });
 
   if (vertexIndices.length > 0) {
+    let drawMode = gl.TRIANGLES;
+
+    switch (formData.get(`draw-mode`) ?? `triangles`) {
+      case `points`:
+        drawMode = gl.POINTS;
+        break;
+      case `lines`:
+        drawMode = gl.LINES;
+        break;
+      case `line-loop`:
+        drawMode = gl.LINE_LOOP;
+        break;
+      case `line-strip`:
+        drawMode = gl.LINE_STRIP;
+        break;
+      case `triangle-strip`:
+        drawMode = gl.TRIANGLE_STRIP;
+        break;
+      case `triangle-fan`:
+        drawMode = gl.TRIANGLE_FAN;
+        break;
+      case `triangles`:
+        drawMode = gl.TRIANGLES;
+        break;
+      default:
+        drawMode = gl.TRIANGLES;
+        break;
+    }
+
     gl.drawElements(
-      gl.TRIANGLES,
+      drawMode,
       vertexIndices.length,
       gl.UNSIGNED_SHORT,
       0,
@@ -365,14 +392,29 @@ const initiateForm = () => {
 
   if (!form) throw new Error(`Form not found`);
 
-  form.addEventListener(`submit`, (event) => {
+  const handleCreateTwistyPuzzle = (event) => {
     event.preventDefault();
     createTwistyPuzzle(form);
-  });
+  }
 
-  form.addEventListener(`input`, (event) => {
-    event.preventDefault();
-    createTwistyPuzzle(form);
+  form.addEventListener(`submit`, handleCreateTwistyPuzzle);
+
+  const isAutoUpdate = form.querySelector(`#is-auto-update`);
+
+  if (!isAutoUpdate) throw new Error(`Is auto update not found`);
+
+  if (isAutoUpdate.checked) {
+    form.addEventListener(`input`, handleCreateTwistyPuzzle);
+  } else {
+    form.removeEventListener(`input`, handleCreateTwistyPuzzle);
+  }
+  
+  isAutoUpdate.addEventListener(`change`, (event) => {
+    if (event.target.checked) {
+      form.addEventListener(`input`, handleCreateTwistyPuzzle);
+    } else {
+      form.removeEventListener(`input`, handleCreateTwistyPuzzle);
+    }
   });
 
   createTwistyPuzzle(form);
