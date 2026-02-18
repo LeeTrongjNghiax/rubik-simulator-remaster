@@ -5,6 +5,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding-inline: 20px;
 
     gap: 20px;
     padding-block: 40px;
@@ -219,13 +220,7 @@
     border-radius: 10px;
 
     @media (orientation: landscape) {
-      height: 80vh;
-      max-height: 100%;
-    }
-
-    @media (orientation: portrait) {
-      width: 80vw;
-      max-width: 100%;
+      flex: 1;
     }
   }
 
@@ -313,5 +308,46 @@
     padding: 5px;
     border-radius: 5px;
     width: 100%;
+  }
+
+  .c-controller-container {
+    display: flex;
+    justify-content: center;
+    /* grid-template-columns: repeat(auto-fit, minmax(50px, 1fr)); */
+    flex-wrap: wrap;
+    gap: 10px;
+    list-style: none;
+  }
+
+  .c-controller-container__controller {
+    width: 50px;
+    background-color: #fff;
+    border: none;
+    color: #000;
+    font-size: 18px;
+    font-weight: 700;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all .3s ease;
+    border: 2px solid #fff;
+  }
+
+  .c-controller-container__controller:hover {
+    background-color: #000;
+
+    .c-controller-container__controller-button {
+      color: #fff;
+    }
+  }
+
+  .c-controller-container__controller-button {
+    transition: all .3s ease;
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    font-weight: 700;
+    cursor: pointer;
+    user-select: none;
   }
 }

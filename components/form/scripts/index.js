@@ -28,8 +28,8 @@ const createTwistyPuzzle = async (form) => {
 
   if (!canvas) throw new Error(`Canvas not found`);
 
-  canvas.width = 500;
-  canvas.height = 500;
+  canvas.width = 300;
+  canvas.height = 300;
 
   const gl = createWebGLRenderingContext(canvas);
 
@@ -92,7 +92,7 @@ const createTwistyPuzzle = async (form) => {
     axisRotationZ: +formData.get(`sticker-container-rotation-z`) ?? 0,
   });
 
-  console.log(Object.fromEntries(formData));
+  // console.log(Object.fromEntries(formData));
 
   const [planesX, planesY, planesZ] = createStickerPlanes({
     planeMatrix,
@@ -246,6 +246,28 @@ const createTwistyPuzzle = async (form) => {
       0,
     );
   }
+
+  const controllerContainer = document.querySelector(`.c-controller-container`);
+
+  if (!controllerContainer) throw new Error(`Controller container not found`);
+
+  controllerContainer.innerHTML = ``;
+
+  const controllerTemplate = document.querySelector(`#controller-template`);
+
+  if (!controllerTemplate) throw new Error(`Controller template not found`);
+
+  rubik.controls.forEach((control) => {
+    const clonedControllerTemplate = controllerTemplate.content.cloneNode(true);
+
+    const controllerButton = clonedControllerTemplate.querySelector(`.c-controller-container__controller-button`);
+
+    if (!controllerButton) throw new Error(`Controller button not found`);
+
+    controllerButton.textContent = control.name;
+    
+    controllerContainer.appendChild(clonedControllerTemplate);
+  });
 }
 
 const initiateForm = () => {
@@ -258,10 +280,10 @@ const initiateForm = () => {
     createTwistyPuzzle(form);
   });
 
-  // form.addEventListener(`input`, (event) => {
-  //   event.preventDefault();
-  //   createTwistyPuzzle(form);
-  // });
+  form.addEventListener(`input`, (event) => {
+    event.preventDefault();
+    createTwistyPuzzle(form);
+  });
 }
 
 document.addEventListener(`DOMContentLoaded`, initiateForm);

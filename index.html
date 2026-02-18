@@ -193,7 +193,7 @@
                   name="sticker-container-position-x-lower-bound"
                   class="c-slider-input__input-lower"
                   step="0.01"
-                  value="-10"
+                  value="-1"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -217,7 +217,7 @@
                   name="sticker-container-position-x-upper-bound"
                   class="c-slider-input__input-upper"
                   step="0.01"
-                  value="10"
+                  value="1"
                 >
               </div>
             </div>
@@ -232,7 +232,7 @@
                   name="sticker-container-position-y-lower-bound"
                   class="c-slider-input__input-lower"
                   step="0.01"
-                  value="-10"
+                  value="-1"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -256,7 +256,7 @@
                   name="sticker-container-position-y-upper-bound"
                   class="c-slider-input__input-upper"
                   step="0.01"
-                  value="10"
+                  value="1"
                 >
               </div>
             </div>
@@ -271,7 +271,7 @@
                   name="sticker-container-position-z-lower-bound"
                   class="c-slider-input__input-lower"
                   step="0.01"
-                  value="-10"
+                  value="-1"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -295,7 +295,7 @@
                   name="sticker-container-position-z-upper-bound"
                   class="c-slider-input__input-upper"
                   step="0.01"
-                  value="10"
+                  value="1"
                 >
               </div>
             </div>
@@ -316,7 +316,7 @@
                   name="sticker-container-rotation-x-lower-bound"
                   class="c-slider-input__input-lower"
                   step="0.01"
-                  value="-10"
+                  value="-1"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -340,7 +340,7 @@
                   name="sticker-container-rotation-x-upper-bound"
                   class="c-slider-input__input-upper"
                   step="0.01"
-                  value="10"
+                  value="1"
                 >
               </div>
             </div>
@@ -355,7 +355,7 @@
                   name="sticker-container-rotation-y-lower-bound"
                   class="c-slider-input__input-lower"
                   step="0.01"
-                  value="-10"
+                  value="-1"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -379,7 +379,7 @@
                   name="sticker-container-rotation-y-upper-bound"
                   class="c-slider-input__input-upper"
                   step="0.01"
-                  value="10"
+                  value="1"
                 >
               </div>
             </div>
@@ -394,7 +394,7 @@
                   name="sticker-container-rotation-z-lower-bound"
                   class="c-slider-input__input-lower"
                   step="0.01"
-                  value="-10"
+                  value="-1"
                 >
 
                 <div class="c-slider-input__input-range-container">
@@ -418,7 +418,7 @@
                   name="sticker-container-rotation-z-upper-bound"
                   class="c-slider-input__input-upper"
                   step="0.01"
-                  value="10"
+                  value="1"
                 >
               </div>
             </div>
@@ -1869,6 +1869,15 @@
     </hgroup>
 
     <canvas class="c-main__canvas"></canvas>
+
+    <ul class="c-controller-container">
+    </ul>
   </main> 
 </body>
+
+<template id="controller-template">
+  <li class="c-controller-container__controller">
+    <button class="c-controller-container__controller-button">D</button>
+  </li>
+</template>
 </html>
