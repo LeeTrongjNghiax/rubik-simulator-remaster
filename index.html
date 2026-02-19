@@ -13,7 +13,6 @@
   <script defer type="module" src="./scripts/event-listeners/index.js"></script>
   <script defer type="module" src="./components/slider-input/scripts/index.js"></script>
   <script defer type="module" src="./components/form/scripts/index.js"></script>
-  <script defer src="./scripts/index.js"></script>
 </head>
 <body>
   <main class="c-main">
@@ -44,6 +43,189 @@
         </button>
       </div>
 
+      <fieldset class="c-form__fieldset">
+        <legend class="c-form__fieldset-legend">
+          Miscellaneous
+        </legend>
+
+        <div 
+          class="c-form__input-group"
+          style="
+            --grid-template-columns: 1fr auto;
+            --grid-template-columns\@1024: 1fr auto;
+          "
+        >
+          <label for="is-auto-update">Is Auto Update</label>
+
+          <input
+            type="checkbox"
+            id="is-auto-update"
+            name="is-auto-update"
+            class="c-form__input-checkbox"
+            checked
+          >
+        </div>
+
+        <div 
+          class="c-form__input-group"
+          style="
+            --grid-template-columns: 1fr auto;
+            --grid-template-columns\@1024: 1fr auto;
+          "
+        >
+          <label for="toggle-controls">Toggle Show/Hide Controls</label>
+
+          <input
+            type="checkbox"
+            id="toggle-controls"
+            name="toggle-controls"
+            class="c-form__input-checkbox"
+            checked
+          >
+        </div>
+
+        <div 
+          class="c-form__input-group"
+          style="
+            --grid-template-columns: 1fr auto;
+            --grid-template-columns\@1024: 1fr auto;
+          "
+        >
+          <label for="toggle-auto-scrambling">Toggle Auto Scrambling</label>
+
+          <input
+            type="checkbox"
+            id="toggle-auto-scrambling"
+            name="toggle-auto-scrambling"
+            class="c-form__input-checkbox"
+            checked
+          >
+        </div>
+      </fieldset>
+
+      <fieldset class="c-form__fieldset u-hidden">
+        <legend class="c-form__fieldset-legend">
+          Sticker Container Dimensions
+        </legend>
+
+        <div class="c-form__input-group">
+          <label for="sticker-container-width">Width:</label>
+
+          <div class="c-slider-input u-flex-1">
+            <input
+              type="number"
+              id="sticker-container-width-lower-bound"
+              name="sticker-container-width-lower-bound"
+              class="c-slider-input__input-lower"
+              step="0.1"
+              value="0"
+            >
+
+            <div class="c-slider-input__input-range-container">
+              <input
+                type="range"
+                id="sticker-container-width"
+                name="sticker-container-width"
+                class="c-slider-input__input-range"
+                step="0.1"
+                value="5"
+              >
+
+              <div class="c-slider-input__input-range-value">
+                -
+              </div>
+            </div>
+
+            <input
+              type="number"
+              id="sticker-container-width-upper-bound"
+              name="sticker-container-width-upper-bound"
+              class="c-slider-input__input-upper"
+              step="0.1"
+              value="10"
+            >
+          </div>
+        </div>
+
+        <div class="c-form__input-group">
+          <label for="sticker-container-width">Height:</label>
+
+          <div class="c-slider-input u-flex-1">
+            <input
+              type="number"
+              id="sticker-container-height-lower-bound"
+              name="sticker-container-height-lower-bound"
+              class="c-slider-input__input-lower"
+              step="0.1"
+              value="0"
+            >
+
+            <div class="c-slider-input__input-range-container">
+              <input
+                type="range"
+                id="sticker-container-height"
+                name="sticker-container-height"
+                class="c-slider-input__input-range"
+                step="0.1"
+                value="5"
+              >
+
+              <div class="c-slider-input__input-range-value">
+                -
+              </div>
+            </div>
+
+            <input
+              type="number"
+              id="sticker-container-height-upper-bound"
+              name="sticker-container-height-upper-bound"
+              class="c-slider-input__input-upper"
+              step="0.1"
+              value="10"
+            >
+          </div>
+        </div>
+
+        <div class="c-form__input-group">
+          <label for="sticker-container-depth">Depth:</label>
+
+          <div class="c-slider-input u-flex-1">
+            <input
+              type="number"
+              id="sticker-container-depth-lower-bound"
+              name="sticker-container-depth-lower-bound"
+              class="c-slider-input__input-lower"
+              step="0.1"
+              value="0"
+            >
+
+            <div class="c-slider-input__input-range-container">
+              <input
+                type="range"
+                id="sticker-container-depth"
+                name="sticker-container-depth"
+                class="c-slider-input__input-range"
+                step="0.1"
+                value="5"
+              >
+
+              <div class="c-slider-input__input-range-value">
+                -
+              </div>
+            </div>
+
+            <input
+              type="number"
+              id="sticker-container-depth-upper-bound"
+              name="sticker-container-depth-upper-bound"
+              class="c-slider-input__input-upper"
+              step="0.1"
+              value="10"
+            >
+          </div>
+        </div>
+      </fieldset>
+      
       <form action="#" class="c-form u-flex-1">
         <button
           type="submit"
@@ -55,171 +237,6 @@
         </button>
 
         <div class="c-form__fieldset-container u-flex-1">
-          <fieldset class="c-form__fieldset">
-            <legend class="c-form__fieldset-legend">
-              Miscellaneous
-            </legend>
-
-            <div 
-              class="c-form__input-group"
-              style="
-                --grid-template-columns: 1fr auto;
-                --grid-template-columns\@1024: 1fr auto;
-              "
-            >
-              <label for="is-auto-update">Is Auto Update</label>
-
-              <input
-                type="checkbox"
-                id="is-auto-update"
-                name="is-auto-update"
-                class="c-form__input-checkbox"
-                checked
-              >
-            </div>
-
-            <div 
-              class="c-form__input-group"
-              style="
-                --grid-template-columns: 1fr auto;
-                --grid-template-columns\@1024: 1fr auto;
-              "
-            >
-              <label for="toggle-controls">Toggle Show/Hide Controls</label>
-
-              <input
-                type="checkbox"
-                id="toggle-controls"
-                name="toggle-controls"
-                class="c-form__input-checkbox"
-                checked
-              >
-            </div>
-          </fieldset>
-
-          <fieldset class="c-form__fieldset u-hidden">
-            <legend class="c-form__fieldset-legend">
-              Sticker Container Dimensions
-            </legend>
-
-            <div class="c-form__input-group">
-              <label for="sticker-container-width">Width:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="sticker-container-width-lower-bound"
-                  name="sticker-container-width-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="0.1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="sticker-container-width"
-                    name="sticker-container-width"
-                    class="c-slider-input__input-range"
-                    step="0.1"
-                    value="5"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="sticker-container-width-upper-bound"
-                  name="sticker-container-width-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="0.1"
-                  value="10"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="sticker-container-width">Height:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="sticker-container-height-lower-bound"
-                  name="sticker-container-height-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="0.1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="sticker-container-height"
-                    name="sticker-container-height"
-                    class="c-slider-input__input-range"
-                    step="0.1"
-                    value="5"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="sticker-container-height-upper-bound"
-                  name="sticker-container-height-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="0.1"
-                  value="10"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="sticker-container-depth">Depth:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="sticker-container-depth-lower-bound"
-                  name="sticker-container-depth-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="0.1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="sticker-container-depth"
-                    name="sticker-container-depth"
-                    class="c-slider-input__input-range"
-                    step="0.1"
-                    value="5"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="sticker-container-depth-upper-bound"
-                  name="sticker-container-depth-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="0.1"
-                  value="10"
-                >
-              </div>
-            </div>
-          </fieldset>
-          
           <fieldset class="c-form__fieldset">
             <legend class="c-form__fieldset-legend">
               Sticker Container Positions

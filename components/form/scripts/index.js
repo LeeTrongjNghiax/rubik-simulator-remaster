@@ -24,9 +24,10 @@ import addUniformsToShader from "../../../scripts/utilities/canvas/add-uniforms-
 import createVertices from "../../../scripts/utilities/twisty-puzzles/create-vertices.js";
 import degreeToRadian from "../../../scripts/utilities/maths/degree-to-radian.js";
 
-const createTwistyPuzzle = async (form) => {
-  let isRotating = false;
+const rubik = new Rubik({});
+let isRotating = false;
 
+const createTwistyPuzzle = async (form) => {
   const formData = new FormData(form);
 
   if (!formData) throw new Error(`Form data not found`);
@@ -63,8 +64,6 @@ const createTwistyPuzzle = async (form) => {
     fragmentShader,
   });
   
-  const rubik = new Rubik({});
-
   const cubieHalfLength = (+formData.get(`cubie-length`) ?? 1) / 2;
 
   const endOfX = ( (+formData.get(`number-of-cubies-x`) ?? 3) - 1) / 2;
@@ -291,6 +290,93 @@ const createTwistyPuzzle = async (form) => {
 
   if (!controllerTemplate) throw new Error(`Controller template not found`);
 
+  const rotateTillDone = (controlName) => {
+    if (isRotating) return;
+
+    isRotating = true;
+
+    const control = rubik.controls.find(
+      (control) => control.name === controlName,
+    );
+
+    if (!control) return;
+
+    let angleToRotate = 0;
+
+    const step = control.rad / (+formData.get(`angle-rotated-ratio-per-frame`) 
+      ? (+formData.get(`angle-rotated-ratio-per-frame`))
+      : 10
+    );
+
+    let newVertices = [...vertices];
+
+    let currentTime = Date.now();
+
+    const rotateInterval = setInterval(() => {
+      const timePassed = Date.now() - currentTime;
+      currentTime = Date.now();
+
+      // angleToRotate += step * timePassed / SECOND_TO_MILLISECONDS;
+      angleToRotate += step;
+
+      gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(newVertices), gl.STATIC_DRAW);
+
+      const axisVector = control.axis.position;
+
+      const planeA = [
+        axisVector[0],
+        axisVector[1],
+        axisVector[2],
+        control.lowerLimit,
+      ];
+
+      const planeB = [
+        axisVector[0],
+        axisVector[1],
+        axisVector[2],
+        control.upperLimit,
+      ];
+
+      gl.uniform3fv(axisVectorUniformLocation, axisVector);
+      gl.uniform4fv(planeAUniformLocation, planeA);
+      gl.uniform4fv(planeBUniformLocation, planeB);
+      gl.uniform1f(radUniformLocation, angleToRotate);
+
+      resetWebGL({
+        webGLContext: gl,
+        canvas,
+        backgroundColor: formData.get(`background-color`) ? hexColorToUnitColor(formData.get(`background-color`)) : [0, 0, 0],
+      });
+
+      gl.drawElements(
+        gl.TRIANGLES, 
+        vertexIndices.length, 
+        gl.UNSIGNED_SHORT, 0
+      );
+
+      if ( Math.abs( angleToRotate - control.rad ) <= EPSILON ) {
+        rubik.rotateFace(
+          control.axis,
+          angleToRotate,
+          control.upperLimit,
+          control.lowerLimit,
+        );
+
+        newVertices = [
+          ...[].concat(
+            ...rubik.cubies.map(
+              (cubie) => cubie.toString()
+            )
+          )
+        ];
+
+        vertices = newVertices;
+        isRotating = false;
+        clearInterval(rotateInterval);
+      }
+    }, +formData.get(`smooth-rotation-per-frame`) ?? 100);
+  }
+
   rubik.controls.forEach((control) => {
     const clonedControllerTemplate = controllerTemplate.content.cloneNode(true);
 
@@ -301,93 +387,36 @@ const createTwistyPuzzle = async (form) => {
     controllerButton.textContent = control.name;
 
     controllerButton.addEventListener(`click`, (e) => {
-      if (isRotating) return;
-
-      isRotating = true;
-
-      const control = rubik.controls.find(
-        (control) => control.name === e.target.textContent,
-      );
-
-      if (!control) return;
-
-      let angleToRotate = 0;
-
-      const step = control.rad / (+formData.get(`angle-rotated-ratio-per-frame`) 
-        ? (+formData.get(`angle-rotated-ratio-per-frame`))
-        : 10
-      );
-
-      let newVertices = [...vertices];
-
-      let currentTime = Date.now();
-
-      const rotateInterval = setInterval(() => {
-        const timePassed = Date.now() - currentTime;
-        currentTime = Date.now();
-
-        // angleToRotate += step * timePassed / SECOND_TO_MILLISECONDS;
-        angleToRotate += step;
-
-        gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(newVertices), gl.STATIC_DRAW);
-
-        const axisVector = control.axis.position;
-
-        const planeA = [
-          axisVector[0],
-          axisVector[1],
-          axisVector[2],
-          control.lowerLimit,
-        ];
-
-        const planeB = [
-          axisVector[0],
-          axisVector[1],
-          axisVector[2],
-          control.upperLimit,
-        ];
-
-        gl.uniform3fv(axisVectorUniformLocation, axisVector);
-        gl.uniform4fv(planeAUniformLocation, planeA);
-        gl.uniform4fv(planeBUniformLocation, planeB);
-        gl.uniform1f(radUniformLocation, angleToRotate);
-
-        resetWebGL({
-          webGLContext: gl,
-          canvas,
-          backgroundColor: formData.get(`background-color`) ? hexColorToUnitColor(formData.get(`background-color`)) : [0, 0, 0],
-        });
-
-        gl.drawElements(
-          gl.TRIANGLES, 
-          vertexIndices.length, 
-          gl.UNSIGNED_SHORT, 0
-        );
-
-        if ( Math.abs( angleToRotate - control.rad ) <= EPSILON ) {
-          rubik.rotateFace(
-            control.axis,
-            angleToRotate,
-            control.upperLimit,
-            control.lowerLimit,
-          );
-
-          newVertices = [
-            ...[].concat(
-              ...rubik.cubies.map(
-                (cubie) => cubie.toString()
-              )
-            )
-          ];
-
-          vertices = newVertices;
-          isRotating = false;
-          clearInterval(rotateInterval);
-        }
-      }, +formData.get(`smooth-rotation-per-frame`) ?? 100);
+      rotateTillDone(e.target.textContent);
     });
     
     controllerContainer.appendChild(clonedControllerTemplate);
+  });
+
+  const toggleAutoScrambling = document.querySelector(`#toggle-auto-scrambling`);
+
+  if (!toggleAutoScrambling) throw new Error(`Toggle auto scrambling not found`);
+
+  let loopTimeout;
+
+  toggleAutoScrambling.addEventListener(`change`, (event) => {
+    if (event.target.checked) {
+      const loop = () => {
+        loopTimeout = requestAnimationFrame(loop);
+
+        const randomControlName = rubik.controls[
+          Math.floor(Math.random() * rubik.controls.length)
+        ].name;
+
+        if (!randomControlName) return;
+
+        rotateTillDone(randomControlName);
+      }
+      
+      loop();
+    } else {
+      cancelAnimationFrame(loopTimeout);
+    }
   });
 }
 
@@ -403,7 +432,7 @@ const initiateForm = () => {
 
   form.addEventListener(`submit`, handleCreateTwistyPuzzle);
 
-  const isAutoUpdate = form.querySelector(`#is-auto-update`);
+  const isAutoUpdate = document.querySelector(`#is-auto-update`);
 
   if (!isAutoUpdate) throw new Error(`Is auto update not found`);
 
@@ -421,7 +450,7 @@ const initiateForm = () => {
     }
   });
 
-  const toggleControls = form.querySelector(`#toggle-controls`);
+  const toggleControls = document.querySelector(`#toggle-controls`);
 
   if (!toggleControls) throw new Error(`Toggle controls not found`);
 

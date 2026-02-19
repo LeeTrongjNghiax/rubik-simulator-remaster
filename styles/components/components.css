@@ -1,5 +1,6 @@
 @layer components {
   .c-main {
+    min-height: 100vh;
     position: relative;
     overflow-x: hidden;
     display: flex;
