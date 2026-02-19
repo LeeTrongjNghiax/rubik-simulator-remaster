@@ -1,6 +1,6 @@
 import { Rubik } from "../../../scripts/classes/index.js";
 import { EPSILON, SECOND_TO_MILLISECONDS } from "../../../scripts/constants/index.js";
-import { hexColorToUnitColor } from "../../../scripts/utilities/index.js";
+import { getRandomInteger, hexColorToUnitColor } from "../../../scripts/utilities/index.js";
 import createWebGLRenderingContext from "../../../scripts/utilities/canvas/create-web-gl-rendering-context.js";
 import resetWebGL from "../../../scripts/utilities/canvas/reset-web-gl.js";
 import addTwistyPuzzleMovementControlSet from "../../../scripts/utilities/twisty-puzzles/add-twisty-puzzle-movement-control-set.js";
@@ -718,6 +718,12 @@ const initiateForm = () => {
         break;
     }
   });
+
+  const randomRubikFormPresetIndex = getRandomInteger(0, loadRubikFormPreset.options.length - 1);
+
+  loadRubikFormPreset.value = loadRubikFormPreset.options[randomRubikFormPresetIndex].value;
+
+  loadRubikFormPreset.dispatchEvent(new Event(`change`));
 
   const isAutoUpdate = document.querySelector(`#is-auto-update`);
 
