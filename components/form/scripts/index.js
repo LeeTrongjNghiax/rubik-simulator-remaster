@@ -26,8 +26,14 @@ import degreeToRadian from "../../../scripts/utilities/maths/degree-to-radian.js
 
 const rubik = new Rubik({});
 let isRotating = false;
+let rotateInterval;
+let loopTimeout;
 
 const createTwistyPuzzle = async (form) => {
+  clearInterval(rotateInterval);
+  cancelAnimationFrame(loopTimeout);
+  isRotating = false;
+
   const formData = new FormData(form);
 
   if (!formData) throw new Error(`Form data not found`);
@@ -312,7 +318,9 @@ const createTwistyPuzzle = async (form) => {
 
     let currentTime = Date.now();
 
-    const rotateInterval = setInterval(() => {
+    clearInterval(rotateInterval);
+
+    rotateInterval = setInterval(() => {
       const timePassed = Date.now() - currentTime;
       currentTime = Date.now();
 
@@ -397,10 +405,30 @@ const createTwistyPuzzle = async (form) => {
 
   if (!toggleAutoScrambling) throw new Error(`Toggle auto scrambling not found`);
 
-  let loopTimeout;
+  if (toggleAutoScrambling.checked) {
+    cancelAnimationFrame(loopTimeout);
+
+    const loop = () => {
+      loopTimeout = requestAnimationFrame(loop);
+
+      const randomControlName = rubik.controls[
+        Math.floor(Math.random() * rubik.controls.length)
+      ].name;
+
+      if (!randomControlName) return;
+
+      rotateTillDone(randomControlName);
+    }
+    
+    loop();
+  } else {
+    cancelAnimationFrame(loopTimeout);
+  }
 
   toggleAutoScrambling.addEventListener(`change`, (event) => {
     if (event.target.checked) {
+      cancelAnimationFrame(loopTimeout);
+
       const loop = () => {
         loopTimeout = requestAnimationFrame(loop);
 
@@ -457,6 +485,12 @@ const initiateForm = () => {
   const controllerContainer = document.querySelector(`.c-controller-container`);
 
   if (!controllerContainer) throw new Error(`Controller container not found`);
+
+  if (toggleControls.checked) {
+    controllerContainer.classList.remove(`u-hidden`);
+  } else {
+    controllerContainer.classList.add(`u-hidden`);
+  }
 
   toggleControls.addEventListener(`change`, (event) => {
     if (event.target.checked) {
