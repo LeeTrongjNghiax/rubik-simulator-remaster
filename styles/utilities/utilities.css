@@ -6,4 +6,8 @@
   .u-hidden {
     display: none;
   }
+
+  .u-overflow-hidden {
+    overflow: hidden;
+  }
 }

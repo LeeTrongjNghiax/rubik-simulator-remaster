@@ -69,10 +69,15 @@
     min-width: 60px;
     width: 60px;
     text-align: center;
+    background-color: var(--color-background);
 
     @media (1024px <= width) {
       font-size: 18px;
     }
+  }
+
+  input[type="color"] {
+    background-color: var(--color-background);
   }
 
   input[type="number"]::-webkit-outer-spin-button,
@@ -118,7 +123,7 @@
     border: 1px solid var(--color-border);
     font-family: var(--font-primary);
     border-radius: 5px;
-    background-color: transparent;
+    background-color: var(--color-background);
     padding: 5px 10px;
     font-size: 16px;
     font-weight: 400;

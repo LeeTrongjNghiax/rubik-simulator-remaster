@@ -17,7 +17,10 @@ const initiateSidebarToggle = ({
   sidebarSelector = ``,
   toggleSelector = ``,
   activeClass = ``,
+  overflowHiddenClass = ``,
 }) => {
+  const html = document.documentElement;
+
   const sidebar = document.querySelector(sidebarSelector);
 
   if (!sidebar) throw new Error(`Sidebar not found: ${sidebarSelector}`);
@@ -27,6 +30,7 @@ const initiateSidebarToggle = ({
   toggleSelectors.forEach((toggle) => {
     toggle.addEventListener(`click`, () => {
       sidebar.classList.toggle(activeClass);
+      html.classList.toggle(overflowHiddenClass);
     });
   });
 }
