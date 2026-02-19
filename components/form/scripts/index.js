@@ -717,6 +717,8 @@ const initiateForm = () => {
 
         break;
     }
+
+    createTwistyPuzzle(form);
   });
 
   const randomRubikFormPresetIndex = getRandomInteger(0, loadRubikFormPreset.options.length - 1);
@@ -764,8 +766,6 @@ const initiateForm = () => {
       controllerContainer.classList.add(`u-hidden`);
     }
   });
-
-  createTwistyPuzzle(form);
 }
 
 document.addEventListener(`DOMContentLoaded`, initiateForm);
