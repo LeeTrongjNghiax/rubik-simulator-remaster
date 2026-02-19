@@ -93,6 +93,7 @@
     background-color: rgb(from var(--color-card) r g b / 0.5);
     width: var(--sidebar-width, min(500px, 100vw));
     height: 100vh;
+    max-height: 100%;
     transition: all 0.3s;
     padding: 20px;
     backdrop-filter: blur(4px);
