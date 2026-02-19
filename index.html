@@ -57,7 +57,7 @@
         <div class="c-form__fieldset-container u-flex-1">
           <fieldset class="c-form__fieldset">
             <legend class="c-form__fieldset-legend">
-              Auto Update
+              Miscellaneous
             </legend>
 
             <div 
@@ -73,6 +73,24 @@
                 type="checkbox"
                 id="is-auto-update"
                 name="is-auto-update"
+                class="c-form__input-checkbox"
+                checked
+              >
+            </div>
+
+            <div 
+              class="c-form__input-group"
+              style="
+                --grid-template-columns: 1fr auto;
+                --grid-template-columns\@1024: 1fr auto;
+              "
+            >
+              <label for="toggle-controls">Toggle Show/Hide Controls</label>
+
+              <input
+                type="checkbox"
+                id="toggle-controls"
+                name="toggle-controls"
                 class="c-form__input-checkbox"
                 checked
               >
@@ -1753,7 +1771,7 @@
                     name="smooth-rotation-per-frame"
                     class="c-slider-input__input-range"
                     step="1"
-                    value="10"
+                    value="5"
                   >
 
                   <div class="c-slider-input__input-range-value">
@@ -1797,7 +1815,7 @@
                     name="angle-rotated-ratio-per-frame"
                     class="c-slider-input__input-range"
                     step="1"
-                    value="16"
+                    value="10"
                   >
 
                   <div class="c-slider-input__input-range-value">

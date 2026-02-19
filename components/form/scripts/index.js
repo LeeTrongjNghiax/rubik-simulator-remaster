@@ -421,6 +421,22 @@ const initiateForm = () => {
     }
   });
 
+  const toggleControls = form.querySelector(`#toggle-controls`);
+
+  if (!toggleControls) throw new Error(`Toggle controls not found`);
+
+  const controllerContainer = document.querySelector(`.c-controller-container`);
+
+  if (!controllerContainer) throw new Error(`Controller container not found`);
+
+  toggleControls.addEventListener(`change`, (event) => {
+    if (event.target.checked) {
+      controllerContainer.classList.remove(`u-hidden`);
+    } else {
+      controllerContainer.classList.add(`u-hidden`);
+    }
+  });
+
   createTwistyPuzzle(form);
 }
 
