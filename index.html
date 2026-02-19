@@ -48,6 +48,28 @@
           Miscellaneous
         </legend>
 
+        <div class="c-form__input-group">
+          <label for="load-rubik-form-preset">Load Rubik Form Preset</label>
+
+          <select
+            name="load-rubik-form-preset"
+            id="load-rubik-form-preset"
+            class="c-form__input-select"
+          >
+            <option value="">None</option>
+            <option value="2x2x2">2 x 2 x 2</option>
+            <option value="3x3x3">3 x 3 x 3</option>
+            <option value="4x4x4">4 x 4 x 4</option>
+            <option value="5x5x5">5 x 5 x 5</option>
+            <option value="6x6x6">6 x 6 x 6</option>
+            <option value="7x7x7">7 x 7 x 7</option>
+            <option value="domino-cube">Domino Cube</option>
+            <option value="tower-cube">Tower Cube</option>
+            <option value="windmill-cube">Windmill Cube</option>
+            <option value="mirrors-block">Mirror's Block</option>
+          </select>
+        </div>
+
         <div 
           class="c-form__input-group"
           style="
@@ -1133,16 +1155,16 @@
 
           <fieldset class="c-form__fieldset">
             <legend class="c-form__fieldset-legend">
-              Inner Cube Inner Color
+              Inner Cube Outer Color
             </legend>
 
             <div class="c-form__input-group">
-              <label for="inner-cube-inner-color">Color:</label>
+              <label for="inner-cube-outer-color">Color:</label>
 
               <input
                 type="color"
-                id="inner-cube-inner-color"
-                name="inner-cube-inner-color"
+                id="inner-cube-outer-color"
+                name="inner-cube-outer-color"
                 class="c-form__input-color"
                 value="#121212"
               >

@@ -461,6 +461,264 @@ const initiateForm = () => {
 
   form.addEventListener(`submit`, handleCreateTwistyPuzzle);
 
+  const loadRubikFormPreset = document.querySelector(`#load-rubik-form-preset`);
+
+  if (!loadRubikFormPreset) throw new Error(`Load rubik form preset not found`);
+
+  loadRubikFormPreset.addEventListener(`change`, (event) => {
+    const preset = event.target.value;
+    
+    switch (preset) {
+      case `2x2x2`:
+        form.querySelector(`#number-of-cubies-x`).value = 2;
+        form.querySelector(`#number-of-cubies-y`).value = 2;
+        form.querySelector(`#number-of-cubies-z`).value = 2;
+
+        form.querySelector(`#sticker-container-position-x`).value = 0;
+        form.querySelector(`#sticker-container-position-y`).value = 0;
+        form.querySelector(`#sticker-container-position-z`).value = 0;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -5;
+
+        form.querySelector(`#sticker-color-up`).value = `#ffffff`;
+        form.querySelector(`#sticker-color-down`).value = `#ffff00`;
+        form.querySelector(`#sticker-color-front`).value = `#00ff00`;
+        form.querySelector(`#sticker-color-back`).value = `#0000ff`;
+        form.querySelector(`#sticker-color-right`).value = `#ff0000`;
+        form.querySelector(`#sticker-color-left`).value = `#ffa800`;
+
+        break;
+      case `4x4x4`:
+        form.querySelector(`#number-of-cubies-x`).value = 4;
+        form.querySelector(`#number-of-cubies-y`).value = 4;
+        form.querySelector(`#number-of-cubies-z`).value = 4;
+
+        form.querySelector(`#sticker-container-position-x`).value = 0;
+        form.querySelector(`#sticker-container-position-y`).value = 0;
+        form.querySelector(`#sticker-container-position-z`).value = 0;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -10;
+
+        form.querySelector(`#sticker-color-up`).value = `#ffffff`;
+        form.querySelector(`#sticker-color-down`).value = `#ffff00`;
+        form.querySelector(`#sticker-color-front`).value = `#00ff00`;
+        form.querySelector(`#sticker-color-back`).value = `#0000ff`;
+        form.querySelector(`#sticker-color-right`).value = `#ff0000`;
+        form.querySelector(`#sticker-color-left`).value = `#ffa800`;
+
+        break;
+      case `5x5x5`:
+        form.querySelector(`#number-of-cubies-x`).value = 5;
+        form.querySelector(`#number-of-cubies-y`).value = 5;
+        form.querySelector(`#number-of-cubies-z`).value = 5;
+
+        form.querySelector(`#sticker-container-position-x`).value = 0;
+        form.querySelector(`#sticker-container-position-y`).value = 0;
+        form.querySelector(`#sticker-container-position-z`).value = 0;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -12;
+
+        form.querySelector(`#sticker-color-up`).value = `#ffffff`;
+        form.querySelector(`#sticker-color-down`).value = `#ffff00`;
+        form.querySelector(`#sticker-color-front`).value = `#00ff00`;
+        form.querySelector(`#sticker-color-back`).value = `#0000ff`;
+        form.querySelector(`#sticker-color-right`).value = `#ff0000`;
+        form.querySelector(`#sticker-color-left`).value = `#ffa800`;
+
+        break;
+      case `6x6x6`:
+        form.querySelector(`#number-of-cubies-x`).value = 6;
+        form.querySelector(`#number-of-cubies-y`).value = 6;
+        form.querySelector(`#number-of-cubies-z`).value = 6;
+
+        form.querySelector(`#sticker-container-position-x`).value = 0;
+        form.querySelector(`#sticker-container-position-y`).value = 0;
+        form.querySelector(`#sticker-container-position-z`).value = 0;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -14;
+
+        form.querySelector(`#sticker-color-up`).value = `#ffffff`;
+        form.querySelector(`#sticker-color-down`).value = `#ffff00`;
+        form.querySelector(`#sticker-color-front`).value = `#00ff00`;
+        form.querySelector(`#sticker-color-back`).value = `#0000ff`;
+        form.querySelector(`#sticker-color-right`).value = `#ff0000`;
+        form.querySelector(`#sticker-color-left`).value = `#ffa800`;
+
+        break;
+      case `7x7x7`:
+        form.querySelector(`#number-of-cubies-x`).value = 7;
+        form.querySelector(`#number-of-cubies-y`).value = 7;
+        form.querySelector(`#number-of-cubies-z`).value = 7;
+
+        form.querySelector(`#sticker-container-position-x`).value = 0;
+        form.querySelector(`#sticker-container-position-y`).value = 0;
+        form.querySelector(`#sticker-container-position-z`).value = 0;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -16;
+
+        form.querySelector(`#sticker-color-up`).value = `#ffffff`;
+        form.querySelector(`#sticker-color-down`).value = `#ffff00`;
+        form.querySelector(`#sticker-color-front`).value = `#00ff00`;
+        form.querySelector(`#sticker-color-back`).value = `#0000ff`;
+        form.querySelector(`#sticker-color-right`).value = `#ff0000`;
+        form.querySelector(`#sticker-color-left`).value = `#ffa800`;
+
+        break;
+      case `domino-cube`:
+        form.querySelector(`#number-of-cubies-x`).value = 3;
+        form.querySelector(`#number-of-cubies-y`).value = 2;
+        form.querySelector(`#number-of-cubies-z`).value = 3;
+
+        form.querySelector(`#sticker-container-position-x`).value = 0;
+        form.querySelector(`#sticker-container-position-y`).value = 0;
+        form.querySelector(`#sticker-container-position-z`).value = 0;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -8;
+
+        form.querySelector(`#sticker-color-up`).value = `#ffffff`;
+        form.querySelector(`#sticker-color-down`).value = `#ffff00`;
+        form.querySelector(`#sticker-color-front`).value = `#00ff00`;
+        form.querySelector(`#sticker-color-back`).value = `#0000ff`;
+        form.querySelector(`#sticker-color-right`).value = `#ff0000`;
+        form.querySelector(`#sticker-color-left`).value = `#ffa800`;
+
+        break;
+      case `tower-cube`:
+        form.querySelector(`#number-of-cubies-x`).value = 2;
+        form.querySelector(`#number-of-cubies-y`).value = 4;
+        form.querySelector(`#number-of-cubies-z`).value = 2;
+
+        form.querySelector(`#sticker-container-position-x`).value = 0;
+        form.querySelector(`#sticker-container-position-y`).value = 0;
+        form.querySelector(`#sticker-container-position-z`).value = 0;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -8;
+
+        form.querySelector(`#sticker-color-up`).value = `#ffffff`;
+        form.querySelector(`#sticker-color-down`).value = `#ffff00`;
+        form.querySelector(`#sticker-color-front`).value = `#00ff00`;
+        form.querySelector(`#sticker-color-back`).value = `#0000ff`;
+        form.querySelector(`#sticker-color-right`).value = `#ff0000`;
+        form.querySelector(`#sticker-color-left`).value = `#ffa800`;
+
+        break;
+      case `windmill-cube`:
+        form.querySelector(`#number-of-cubies-x`).value = 3;
+        form.querySelector(`#number-of-cubies-y`).value = 3;
+        form.querySelector(`#number-of-cubies-z`).value = 3;
+
+        form.querySelector(`#sticker-container-position-x`).value = 0;
+        form.querySelector(`#sticker-container-position-y`).value = 0;
+        form.querySelector(`#sticker-container-position-z`).value = 0;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0.5;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -8;
+
+        form.querySelector(`#sticker-color-up`).value = `#ffffff`;
+        form.querySelector(`#sticker-color-down`).value = `#ffff00`;
+        form.querySelector(`#sticker-color-front`).value = `#00ff00`;
+        form.querySelector(`#sticker-color-back`).value = `#0000ff`;
+        form.querySelector(`#sticker-color-right`).value = `#ff0000`;
+        form.querySelector(`#sticker-color-left`).value = `#ffa800`;
+
+        break;
+      case `mirrors-block`:
+        form.querySelector(`#sticker-container-position-x`).value = 0.4;
+        form.querySelector(`#sticker-container-position-y`).value = -0.5;
+        form.querySelector(`#sticker-container-position-z`).value = 0.6;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -10;
+
+        form.querySelector(`#sticker-color-up`).value = `#c0c0c0`;
+        form.querySelector(`#sticker-color-down`).value = `#c0c0c0`;
+        form.querySelector(`#sticker-color-front`).value = `#c0c0c0`;
+        form.querySelector(`#sticker-color-back`).value = `#c0c0c0`;
+        form.querySelector(`#sticker-color-right`).value = `#c0c0c0`;
+        form.querySelector(`#sticker-color-left`).value = `#c0c0c0`;
+
+        form.querySelector(`#is-render-inner-outer-cubes`).checked = true;
+        break;
+      case `3x3x3`: default:
+        form.querySelector(`#number-of-cubies-x`).value = 3;
+        form.querySelector(`#number-of-cubies-y`).value = 3;
+        form.querySelector(`#number-of-cubies-z`).value = 3;
+
+        form.querySelector(`#sticker-container-position-x`).value = 0;
+        form.querySelector(`#sticker-container-position-y`).value = 0;
+        form.querySelector(`#sticker-container-position-z`).value = 0;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -8;
+
+        form.querySelector(`#sticker-color-up`).value = `#ffffff`;
+        form.querySelector(`#sticker-color-down`).value = `#ffff00`;
+        form.querySelector(`#sticker-color-front`).value = `#00ff00`;
+        form.querySelector(`#sticker-color-back`).value = `#0000ff`;
+        form.querySelector(`#sticker-color-right`).value = `#ff0000`;
+        form.querySelector(`#sticker-color-left`).value = `#ffa800`;
+
+        break;
+    }
+  });
+
   const isAutoUpdate = document.querySelector(`#is-auto-update`);
 
   if (!isAutoUpdate) throw new Error(`Is auto update not found`);
