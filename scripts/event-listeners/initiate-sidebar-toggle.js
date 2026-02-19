@@ -30,7 +30,7 @@ const initiateSidebarToggle = ({
   toggleSelectors.forEach((toggle) => {
     toggle.addEventListener(`click`, () => {
       sidebar.classList.toggle(activeClass);
-      html.classList.toggle(overflowHiddenClass);
+      // html.classList.toggle(overflowHiddenClass);
     });
   });
 }

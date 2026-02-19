@@ -15,6 +15,7 @@ import UPDATE_EACH_SECOND from "./update-each-second.constant.js";
 import ZERO from "./zero.constant.js";
 import NUMBER_OF_DIMENSTION_IN_THREE_DIMENSION from "./number-of-dimenstion-in-three-dimension.constant.js";
 import NUMBER_OF_COMPONENT_IN_RGBA_COLOR_FORMAT from "./number-of-component-in-rgba-color-format.constant.js";
+import SECOND_TO_MILLISECONDS from "./second-to-milliseconds.constant.js";
 
 export {
   DECIMAL_BASE_DIGIT_COUNT,
@@ -34,4 +35,5 @@ export {
   ROTATE_QUARTER_OF_CIRCLE_REVERSE_SYMBOL,
   UPDATE_EACH_SECOND,
   ZERO,
+  SECOND_TO_MILLISECONDS,
 };

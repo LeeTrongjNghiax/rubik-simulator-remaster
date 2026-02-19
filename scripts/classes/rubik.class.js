@@ -1,5 +1,8 @@
 import { getDotProductOfPlaneAndVector } from "../utilities/maths/index.js";
 import { Plane, Position, Control, Cubie } from "./index.js";
+import identity from "../utilities/maths/identity.js";
+import rotate from "../utilities/maths/rotate.js";
+import transformMat4 from "../utilities/maths/transform-mat4.js";
 
 class Rubik {
   /**
@@ -95,14 +98,24 @@ class Rubik {
     // console.log(axis, rad, upper_limit, lower_limit);
 
     const cubiesToRotate = this.getCubiesInBetweenTwoParallelPlanes(
-      new Plane(axis.x, axis.y, axis.z, upperLimit), 
-      new Plane(axis.x, axis.y, axis.z, lowerLimit), 
+      new Plane({
+        a: axis.x,
+        b: axis.y,
+        c: axis.z,
+        d: upperLimit
+      }), 
+      new Plane({
+        a: axis.x,
+        b: axis.y,
+        c: axis.z,
+        d: lowerLimit
+      }), 
     );
 
     // console.log(cubies_to_rotate);
 
     const identityMatrix = new Float32Array(16);
-    identity(identity_matrix);
+    identity(identityMatrix);
 
     const axisVector = new Float32Array(16);
     axisVector[0] = axis.x;
@@ -116,7 +129,7 @@ class Rubik {
     
     let rotatedVector;
 
-    for (let i = 0; i < cubies_to_rotate.length; i++) {
+    for (let i = 0; i < cubiesToRotate.length; i++) {
 
       rotatedVector = [];
 

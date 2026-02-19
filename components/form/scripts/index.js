@@ -1,5 +1,5 @@
 import { Rubik } from "../../../scripts/classes/index.js";
-import { EPSILON } from "../../../scripts/constants/index.js";
+import { EPSILON, SECOND_TO_MILLISECONDS } from "../../../scripts/constants/index.js";
 import { hexColorToUnitColor } from "../../../scripts/utilities/index.js";
 import createWebGLRenderingContext from "../../../scripts/utilities/canvas/create-web-gl-rendering-context.js";
 import resetWebGL from "../../../scripts/utilities/canvas/reset-web-gl.js";
@@ -191,7 +191,7 @@ const createTwistyPuzzle = async (form) => {
     endDepth: endOfZ,
   });
 
-  const vertices = createVertices(rubik);
+  let vertices = createVertices(rubik);
 
   addVerticesBufferData(gl, vertices);
 
@@ -309,18 +309,24 @@ const createTwistyPuzzle = async (form) => {
         (control) => control.name === e.target.textContent,
       );
 
-      if (!control) return
+      if (!control) return;
 
       let angleToRotate = 0;
-      const step = control.rad / 0.01;
+
+      const step = control.rad / (+formData.get(`angle-rotated-ratio-per-frame`) 
+        ? (+formData.get(`angle-rotated-ratio-per-frame`))
+        : 10
+      );
+
       let newVertices = [...vertices];
-      // let currentTime: number = Date.now();
+
+      let currentTime = Date.now();
 
       const rotateInterval = setInterval(() => {
-        // const timePassed: number = Date.now() - currentTime;
-        // currentTime = Date.now();
+        const timePassed = Date.now() - currentTime;
+        currentTime = Date.now();
 
-        // angleToRotate += step * timePassed / SECOND_TO_MILLISECOND;
+        // angleToRotate += step * timePassed / SECOND_TO_MILLISECONDS;
         angleToRotate += step;
 
         gl.bufferData(gl.ARRAY_BUFFER, new Float32Array(newVertices), gl.STATIC_DRAW);
@@ -349,7 +355,7 @@ const createTwistyPuzzle = async (form) => {
         resetWebGL({
           webGLContext: gl,
           canvas,
-          backgroundColor: [0, 0, 0],
+          backgroundColor: formData.get(`background-color`) ? hexColorToUnitColor(formData.get(`background-color`)) : [0, 0, 0],
         });
 
         gl.drawElements(
@@ -378,9 +384,7 @@ const createTwistyPuzzle = async (form) => {
           isRotating = false;
           clearInterval(rotateInterval);
         }
-      }, 1000);
-
-      console.log('rotating');
+      }, +formData.get(`smooth-rotation-per-frame`) ?? 100);
     });
     
     controllerContainer.appendChild(clonedControllerTemplate);
