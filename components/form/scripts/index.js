@@ -24,7 +24,6 @@ import addUniformsToShader from "../../../scripts/utilities/canvas/add-uniforms-
 import createVertices from "../../../scripts/utilities/twisty-puzzles/create-vertices.js";
 import degreeToRadian from "../../../scripts/utilities/maths/degree-to-radian.js";
 
-const rubik = new Rubik({});
 let isRotating = false;
 let rotateInterval;
 let loopTimeout;
@@ -80,6 +79,8 @@ const createTwistyPuzzle = async (form) => {
 
   const endOfZ = ( (+formData.get(`number-of-cubies-z`) ?? 3) - 1) / 2;
   const startOfZ = -endOfZ;
+
+  const rubik = new Rubik({});
 
   rubik.stickerGap = +formData.get(`sticker-gap`) ?? 0;
 
