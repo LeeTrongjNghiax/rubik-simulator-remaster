@@ -249,7 +249,7 @@ const createTwistyPuzzle = async (form) => {
     pointSizeUniformLocation,
   });
 
-  if (vertexIndices.length > 0) {
+  const getDrawMode = () => {
     let drawMode = gl.TRIANGLES;
 
     switch (formData.get(`draw-mode`) ?? `triangles`) {
@@ -279,6 +279,12 @@ const createTwistyPuzzle = async (form) => {
         break;
     }
 
+    return drawMode;
+  }
+
+  const drawMode = getDrawMode();
+
+  if (vertexIndices.length > 0) {
     gl.drawElements(
       drawMode,
       vertexIndices.length,
@@ -358,7 +364,7 @@ const createTwistyPuzzle = async (form) => {
       });
 
       gl.drawElements(
-        gl.TRIANGLES, 
+        drawMode,
         vertexIndices.length, 
         gl.UNSIGNED_SHORT, 0
       );
