@@ -163,6 +163,7 @@ const createTwistyPuzzle = async (form) => {
       planesA: planesX,
       planesB: planesY,
       planesC: planesZ,
+      isRenderCenterStickers: (formData.get(`is-render-center-stickers`) === `on`),
     }) 
     : [];
 
@@ -172,6 +173,7 @@ const createTwistyPuzzle = async (form) => {
       planesA: innerPlanesX,
       planesB: innerPlanesY,
       planesC: innerPlanesZ,
+      isRenderCenterInnerOuterCubes: (formData.get(`is-render-center-inner-outer-cubes`) === `on`),
     }) 
     : [];
 
@@ -696,6 +698,34 @@ const initiateForm = () => {
         form.querySelector(`#sticker-color-left`).value = `#c0c0c0`;
 
         form.querySelector(`#is-render-inner-outer-cubes`).checked = true;
+        break;
+      case `void-cube`:
+        form.querySelector(`#number-of-cubies-x`).value = 3;
+        form.querySelector(`#number-of-cubies-y`).value = 3;
+        form.querySelector(`#number-of-cubies-z`).value = 3;
+
+        form.querySelector(`#sticker-container-position-x`).value = 0;
+        form.querySelector(`#sticker-container-position-y`).value = 0;
+        form.querySelector(`#sticker-container-position-z`).value = 0;
+
+        form.querySelector(`#sticker-container-rotation-x`).value = 0;
+        form.querySelector(`#sticker-container-rotation-y`).value = 0;
+        form.querySelector(`#sticker-container-rotation-z`).value = 0;
+
+        form.querySelector(`#camera-position-x`).value = 0;
+        form.querySelector(`#camera-position-y`).value = 0;
+        form.querySelector(`#camera-position-z`).value = -8;
+
+        form.querySelector(`#sticker-color-up`).value = `#ffffff`;
+        form.querySelector(`#sticker-color-down`).value = `#ffff00`;
+        form.querySelector(`#sticker-color-front`).value = `#00ff00`;
+        form.querySelector(`#sticker-color-back`).value = `#0000ff`;
+        form.querySelector(`#sticker-color-right`).value = `#ff0000`;
+        form.querySelector(`#sticker-color-left`).value = `#ffa800`;
+
+        form.querySelector(`#is-render-center-stickers`).checked = false;
+        form.querySelector(`#is-render-inner-outer-cubes`).checked = false;
+
         break;
       case `3x3x3`: default:
         form.querySelector(`#number-of-cubies-x`).value = 3;

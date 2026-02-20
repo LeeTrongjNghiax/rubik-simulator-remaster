@@ -25,14 +25,22 @@ const initiateSliderInput = () => {
 
     rangeValue.textContent = rangeInput.value;
 
-    const normalizedValue = clamp(+rangeInput.value, +lowerBoundInput.value, +upperBoundInput.value);
+    const normalizedValue = clamp(
+      +rangeInput.value,
+      +lowerBoundInput.value,
+      +upperBoundInput.value
+    );
 
     rangeValue.style.left = `${normalizedValue * 100}%`;
 
     rangeInput.addEventListener(`input`, () => {
       rangeValue.textContent = rangeInput.value;
 
-      const normalizedValue = clamp(+rangeInput.value, +lowerBoundInput.value, +upperBoundInput.value);
+      const normalizedValue = clamp(
+        +rangeInput.value,
+        +lowerBoundInput.value,
+        +upperBoundInput.value
+      );
 
       rangeValue.style.left = `${normalizedValue * 100}%`;
     });
