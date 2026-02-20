@@ -5,7 +5,9 @@ const createVerticesFromThreeIntersectedPlanes = ({
   planesA, 
   planesB,
   planesC,
-  isRenderCenterStickers,
+  isRenderCenterStickers = true,
+  isRenderCornerStickers = true,
+  isRenderEdgeStickers = true,
 }) => {
   const vertices = [];
 
@@ -13,6 +15,13 @@ const createVerticesFromThreeIntersectedPlanes = ({
     for (let j = 0; j < planesB.length; j++) {
       for (let k = 0; k < planesC.length; k++) {
         // Check if 3 planes intersected a sticker vertex
+
+        const isRenderCenterStickerX = isRenderCenterStickers
+          ? true
+          : (
+            (j < 3 || j > planesB.length - 1 - 3) ||
+            (k < 3 || k > planesC.length - 1 - 3)
+          );
 
         const isRenderCenterStickerZ = isRenderCenterStickers
           ? true
@@ -28,18 +37,48 @@ const createVerticesFromThreeIntersectedPlanes = ({
             (k < 3 || k > planesC.length - 1 - 3)
           );
 
-        const isRenderCenterStickerX = isRenderCenterStickers
+        const isRenderCornerSticker = isRenderCornerStickers
+          ? true
+          : !(
+            (i < 3 || i > planesA.length - 1 - 3) &&
+            (j < 3 || j > planesB.length - 1 - 3) &&
+            (k < 3 || k > planesC.length - 1 - 3)
+          );
+
+        const isRenderEdgeStickerX = isRenderEdgeStickers
           ? true
           : (
-            (j < 3 || j > planesB.length - 1 - 3) ||
-            (k < 3 || k > planesC.length - 1 - 3)
-          )
+            ( !(j < 3 || j > planesB.length - 1 - 3) ||
+            ( (j < 3 || j > planesA.length - 1 - 3) && (k < 3 || k > planesC.length - 1 - 3) ) ) &&
+            ( !(k < 3 || k > planesC.length - 1 - 3) ||
+            ( (k < 3 || k > planesC.length - 1 - 3) && (j < 3 || j > planesB.length - 1 - 3) ) )
+          );
+
+        const isRenderEdgeStickerY = isRenderEdgeStickers
+          ? true
+          : (
+            ( !(i < 3 || i > planesA.length - 1 - 3) ||
+            ( (i < 3 || i > planesA.length - 1 - 3) && (k < 3 || k > planesC.length - 1 - 3) ) ) &&
+            ( !(k < 3 || k > planesC.length - 1 - 3) ||
+            ( (k < 3 || k > planesC.length - 1 - 3) && (i < 3 || i > planesA.length - 1 - 3) ) )
+          );
+
+        const isRenderEdgeStickerZ = isRenderEdgeStickers
+          ? true
+          : (
+            ( !(i < 3 || i > planesA.length - 1 - 3) ||
+            ( (i < 3 || i > planesA.length - 1 - 3) && (j < 3 || j > planesB.length - 1 - 3) ) ) &&
+            ( !(j < 3 || j > planesB.length - 1 - 3) ||
+            ( (j < 3 || j > planesA.length - 1 - 3) && (i < 3 || i > planesA.length - 1 - 3) ) )
+          );
 
         if (
           (i === 0 || i === planesA.length - 1) &&
           (j !== 0 && j !== planesB.length - 1) &&
           (k !== 0 && k !== planesC.length - 1) &&
-          isRenderCenterStickerX
+          isRenderCenterStickerX &&
+          isRenderCornerSticker &&
+          isRenderEdgeStickerX
         ) {
           vertices.push(
             createVertexFromThreeIntersectedPlanes({
@@ -59,7 +98,9 @@ const createVerticesFromThreeIntersectedPlanes = ({
           (i !== 0 && i !== planesA.length - 1) &&
           (j === 0 || j === planesB.length - 1) &&
           (k !== 0 && k !== planesC.length - 1) &&
-          isRenderCenterStickerY
+          isRenderCenterStickerY &&
+          isRenderCornerSticker &&
+          isRenderEdgeStickerY
         ) {
           vertices.push(
             createVertexFromThreeIntersectedPlanes({
@@ -79,7 +120,9 @@ const createVerticesFromThreeIntersectedPlanes = ({
           (i !== 0 && i !== planesA.length - 1) &&
           (j !== 0 && j !== planesB.length - 1) &&
           (k === 0 || k === planesC.length - 1) &&
-          isRenderCenterStickerZ
+          isRenderCenterStickerZ &&
+          isRenderCornerSticker &&
+          isRenderEdgeStickerZ
         ) {
           vertices.push(
             createVertexFromThreeIntersectedPlanes({

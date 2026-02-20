@@ -1085,7 +1085,7 @@
                 id="inner-cube-outer-color"
                 name="inner-cube-outer-color"
                 class="c-form__input-color"
-                value="#121212"
+                value="#dd27ce"
               >
             </div>
           </fieldset>
@@ -1610,7 +1610,27 @@
                 --grid-template-columns\@1024: 1fr auto;
               "
             >
-              <label for="is-render-center-stickers">Is Render Center Stickers:</label>
+              <label for="is-render-stickers">Is Render Stickers</label>
+
+              <input
+                type="checkbox"
+                id="is-render-stickers"
+                name="is-render-stickers"
+                class="c-form__input-checkbox"
+                checked
+              >
+            </div>
+
+            <div 
+              class="c-form__input-group"
+              style="
+                --grid-template-columns: 1fr auto;
+                --grid-template-columns\@1024: 1fr auto;
+              "
+            >
+              <label for="is-render-center-stickers">
+                Is Render Center Stickers:
+              </label>
 
               <input
                 type="checkbox"
@@ -1628,32 +1648,34 @@
                 --grid-template-columns\@1024: 1fr auto;
               "
             >
-              <label for="is-render-stickers">Is Render Stickers</label>
+              <label for="is-render-corner-stickers">
+                Is Render Corner Stickers:
+              </label>
 
               <input
                 type="checkbox"
-                id="is-render-stickers"
-                name="is-render-stickers"
+                id="is-render-corner-stickers"
+                name="is-render-corner-stickers"
                 class="c-form__input-checkbox"
                 checked
               >
             </div>
 
-            <div
+            <div 
               class="c-form__input-group"
               style="
                 --grid-template-columns: 1fr auto;
                 --grid-template-columns\@1024: 1fr auto;
               "
             >
-              <label for="is-render-center-inner-outer-cubes">
-                Is Render Center Inner Outer Cubes
+              <label for="is-render-edge-stickers">
+                Is Render Edge Stickers:
               </label>
 
               <input
                 type="checkbox"
-                id="is-render-center-inner-outer-cubes"
-                name="is-render-center-inner-outer-cubes"
+                id="is-render-edge-stickers"
+                name="is-render-edge-stickers"
                 class="c-form__input-checkbox"
                 checked
               >
@@ -1675,7 +1697,64 @@
                 id="is-render-inner-outer-cubes"
                 name="is-render-inner-outer-cubes"
                 class="c-form__input-checkbox"
+              >
+            </div>
+
+            <div
+              class="c-form__input-group"
+              style="
+                --grid-template-columns: 1fr auto;
+                --grid-template-columns\@1024: 1fr auto;
+              "
+            >
+              <label for="is-render-center-inner-outer-cubes">
+                Is Render Center Inner Outer Cubes
+              </label>
+
+              <input
+                type="checkbox"
+                id="is-render-center-inner-outer-cubes"
+                name="is-render-center-inner-outer-cubes"
+                class="c-form__input-checkbox"
+              >
+            </div>
+
+            <div
+              class="c-form__input-group"
+              style="
+                --grid-template-columns: 1fr auto;
+                --grid-template-columns\@1024: 1fr auto;
+              "
+            >
+              <label for="is-render-corner-inner-outer-cubes">
+                Is Render Corner Inner Outer Cubes
+              </label>
+
+              <input
+                type="checkbox"
+                id="is-render-corner-inner-outer-cubes"
+                name="is-render-corner-inner-outer-cubes"
+                class="c-form__input-checkbox"
                 checked
+              >
+            </div>
+
+            <div
+              class="c-form__input-group"
+              style="
+                --grid-template-columns: 1fr auto;
+                --grid-template-columns\@1024: 1fr auto;
+              "
+            >
+              <label for="is-render-edge-inner-outer-cubes">
+                Is Render Edge Inner Outer Cubes
+              </label>
+
+              <input
+                type="checkbox"
+                id="is-render-edge-inner-outer-cubes"
+                name="is-render-edge-inner-outer-cubes"
+                class="c-form__input-checkbox"
               >
             </div>
 

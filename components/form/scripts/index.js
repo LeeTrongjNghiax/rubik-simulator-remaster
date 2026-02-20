@@ -164,6 +164,8 @@ const createTwistyPuzzle = async (form) => {
       planesB: planesY,
       planesC: planesZ,
       isRenderCenterStickers: (formData.get(`is-render-center-stickers`) === `on`),
+      isRenderCornerStickers: (formData.get(`is-render-corner-stickers`) === `on`),
+      isRenderEdgeStickers: (formData.get(`is-render-edge-stickers`) === `on`),
     }) 
     : [];
 
@@ -174,6 +176,8 @@ const createTwistyPuzzle = async (form) => {
       planesB: innerPlanesY,
       planesC: innerPlanesZ,
       isRenderCenterInnerOuterCubes: (formData.get(`is-render-center-inner-outer-cubes`) === `on`),
+      isRenderCornerInnerOuterCubes: (formData.get(`is-render-corner-inner-outer-cubes`) === `on`),
+      isRenderEdgeInnerOuterCubes: (formData.get(`is-render-edge-inner-outer-cubes`) === `on`),
     }) 
     : [];
 
@@ -758,6 +762,7 @@ const initiateForm = () => {
   });
 
   const randomRubikFormPresetIndex = getRandomInteger(0, loadRubikFormPreset.options.length - 1);
+  // const randomRubikFormPresetIndex = 0;
 
   loadRubikFormPreset.value = loadRubikFormPreset.options[randomRubikFormPresetIndex].value;
 

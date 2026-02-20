@@ -5,7 +5,9 @@ const createInnerVerticesFromThreeIntersectedPlanes = ({
   planesA, 
   planesB,
   planesC,
-  isRenderCenterInnerOuterCubes,
+  isRenderCenterInnerOuterCubes = true,
+  isRenderCornerInnerOuterCubes = false,
+  isRenderEdgeInnerOuterCubes = false,
 }) => {
   const vertices = [];
 
@@ -14,13 +16,25 @@ const createInnerVerticesFromThreeIntersectedPlanes = ({
       for (let k = 0; k < planesC.length; k++) {
         const isRenderCenterInnerOuterCube = isRenderCenterInnerOuterCubes
           ? true
-          : (
-            (j < 3 || j > planesB.length - 1 - 3) ||
-            (i < 3 || i > planesA.length - 1 - 3) ||
-            (k < 3 || k > planesC.length - 1 - 3)
+          : true;
+
+        const isRenderCornerInnerOuterCube = isRenderCornerInnerOuterCubes
+          ? true
+          : !(
+            (i < 2 || i > planesA.length - 1 - 2) &&
+            (j < 2 || j > planesB.length - 1 - 2) &&
+            (k < 2 || k > planesC.length - 1 - 2)
           );
 
-        if (isRenderCenterInnerOuterCube) {
+        const isRenderEdgeInnerOuterCube = isRenderEdgeInnerOuterCubes
+          ? true
+          : true;
+
+        if (
+          isRenderCenterInnerOuterCube &&
+          isRenderCornerInnerOuterCube &&
+          isRenderEdgeInnerOuterCube
+        ) {
           vertices.push(
             createVertexFromThreeIntersectedPlanes({
               twistyPuzzle,
@@ -32,10 +46,8 @@ const createInnerVerticesFromThreeIntersectedPlanes = ({
               planesC,
               plane: planesA[i],
             })
-          )
-        }
+          );
 
-        if (isRenderCenterInnerOuterCube) {
           vertices.push(
             createVertexFromThreeIntersectedPlanes({
               twistyPuzzle,
@@ -47,10 +59,8 @@ const createInnerVerticesFromThreeIntersectedPlanes = ({
               planesC,
               plane: planesB[j],
             })
-          )
-        }
+          );
 
-        if (isRenderCenterInnerOuterCube) {
           vertices.push(
             createVertexFromThreeIntersectedPlanes({
               twistyPuzzle,

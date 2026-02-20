@@ -32,8 +32,12 @@ const addFacesToTwistyPuzzle = ({
       );
     }
 
+    let addedFaces = faceVertices;
+
+    if (faceVertices.includes(undefined)) addedFaces = [];
+
     const face = new Face({
-      vertices: faceVertices,
+      vertices: addedFaces,
       absolutePosition,
       color,
       colorName,
@@ -48,6 +52,8 @@ const addFacesToTwistyPuzzle = ({
         const cubie = new Cubie([], new Position({ x: i, y: j, z: k }));
 
         for (let l = 0; l < numberOfFace; l++) {
+          if (faces[l] === undefined) continue
+
           if (
             JSON.stringify(faces[l].absolutePosition) === 
             JSON.stringify(cubie.absolutePosition)
