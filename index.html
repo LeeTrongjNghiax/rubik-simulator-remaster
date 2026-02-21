@@ -1122,63 +1122,6 @@
                 class="c-form__input-checkbox"
               >
             </div>
-
-            <div class="c-form__input-group">
-              <label for="draw-mode">Draw Mode</label>
-
-              <select
-                name="draw-mode"
-                id="draw-mode"
-                class="c-form__input-select"
-              >
-                <option value="points">Points</option>
-                <option value="lines">Lines</option>
-                <option value="line-loop">Line Loop</option>
-                <option value="line-strip">Line Strip</option>
-                <option value="triangle-strip">Triangle Strip</option>
-                <option value="triangle-fan">Triangle Fan</option>
-                <option value="triangles" selected>Triangles</option>
-              </select>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="point-size">Point Size:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="point-size-lower-bound"
-                  name="point-size-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="point-size"
-                    name="point-size"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="10"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="point-size-upper-bound"
-                  name="point-size-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="100"
-                >
-              </div>
-            </div>
           </fieldset>
                     
           <fieldset class="c-form__fieldset">
@@ -1361,55 +1304,61 @@
           </fieldset>
         </div>
       </form>
+
+      <div class="c-form__input-group">
+        <label for="load-rubik-form-preset">Load Rubik Form Preset</label>
+
+        <select
+          name="load-rubik-form-preset"
+          id="load-rubik-form-preset"
+          class="c-form__input-select"
+        >
+          <option value="">None</option>
+          <option value="2x2x2">2 x 2 x 2</option>
+          <option value="3x3x3">3 x 3 x 3</option>
+          <option value="4x4x4">4 x 4 x 4</option>
+          <option value="5x5x5">5 x 5 x 5</option>
+          <option value="6x6x6">6 x 6 x 6</option>
+          <option value="7x7x7">7 x 7 x 7</option>
+          <option value="domino-cube">Domino Cube</option>
+          <option value="tower-cube">Tower Cube</option>
+          <option value="windmill-cube">Windmill Cube</option>
+          <option value="mirrors-block">Mirror's Block</option>
+          <option value="void-cube">Void Cube</option>
+        </select>
+      </div>
     </aside>
 
     <aside class="c-sidebar c-sidebar--right">
-      <button 
-        class="c-sidebar__sidebar-right-toggle-button"
-        name="sidebar-right-toggle-button"
-        title="Close Right Sidebar"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          class="lucide lucide-x-icon lucide-x"
-        >
-          <path d="M18 6 6 18"/>
-          <path d="m6 6 12 12"/>
-        </svg>
-      </button>
+      <div class="c-sidebar__header">
+        <h2 class="c-sidebar__header-title">
+          Update Twisty Puzzle
+        </h2>
 
-      <legend class="c-form__fieldset-legend">Miscellaneous</legend>
+        <button 
+          class="c-sidebar__sidebar-right-toggle-button"
+          name="sidebar-right-toggle-button"
+          title="Close Right Sidebar"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            class="lucide lucide-x-icon lucide-x"
+          >
+            <path d="M18 6 6 18"/>
+            <path d="m6 6 12 12"/>
+          </svg>
+        </button>
+      </div>
 
       <div class="c-form__fieldset-container u-flex-1">
         <fieldset class="c-form__fieldset">
-          <div class="c-form__input-group">
-            <label for="load-rubik-form-preset">Load Rubik Form Preset</label>
-
-            <select
-              name="load-rubik-form-preset"
-              id="load-rubik-form-preset"
-              class="c-form__input-select"
-            >
-              <option value="">None</option>
-              <option value="2x2x2">2 x 2 x 2</option>
-              <option value="3x3x3">3 x 3 x 3</option>
-              <option value="4x4x4">4 x 4 x 4</option>
-              <option value="5x5x5">5 x 5 x 5</option>
-              <option value="6x6x6">6 x 6 x 6</option>
-              <option value="7x7x7">7 x 7 x 7</option>
-              <option value="domino-cube">Domino Cube</option>
-              <option value="tower-cube">Tower Cube</option>
-              <option value="windmill-cube">Windmill Cube</option>
-              <option value="mirrors-block">Mirror's Block</option>
-              <option value="void-cube">Void Cube</option>
-            </select>
-          </div>
+          <legend class="c-form__fieldset-legend">Miscellaneous</legend>
 
           <div 
             class="c-form__input-group"
@@ -2095,8 +2044,67 @@
               id="background-color"
               name="background-color"
               class="c-form__input-color"
-              value="#090909"
+              value="#efefef"
             >
+          </div>
+        </fieldset>
+
+        <fieldset class="c-form__fieldset">
+          <div class="c-form__input-group">
+            <label for="draw-mode">Draw Mode</label>
+
+            <select
+              name="draw-mode"
+              id="draw-mode"
+              class="c-form__input-select"
+            >
+              <option value="points">Points</option>
+              <option value="lines">Lines</option>
+              <option value="line-loop">Line Loop</option>
+              <option value="line-strip">Line Strip</option>
+              <option value="triangle-strip">Triangle Strip</option>
+              <option value="triangle-fan">Triangle Fan</option>
+              <option value="triangles" selected>Triangles</option>
+            </select>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="point-size">Point Size:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="point-size-lower-bound"
+                name="point-size-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="0"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="point-size"
+                  name="point-size"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="10"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="point-size-upper-bound"
+                name="point-size-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="100"
+              >
+            </div>
           </div>
         </fieldset>
       </div>

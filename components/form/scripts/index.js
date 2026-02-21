@@ -288,6 +288,10 @@ const createTwistyPuzzle = async (form) => {
 
   if (!cameraUpZ) throw new Error(`Camera Up Axis Z not found`);
 
+  const pointSize = document.querySelector(`#point-size`);
+
+  if (!pointSize) throw new Error(`Point size not found`);
+
   const updateMatrix = () => {
     const { matWorld, matView, matProjection } = createSupportMatrix({
       orientationX: +orientationX.value ?? 0,
@@ -313,7 +317,7 @@ const createTwistyPuzzle = async (form) => {
       matWorld,
       matView,
       matProj: matProjection,
-      pointSize: +formData.get(`point-size`) ?? 1,
+      pointSize: +pointSize.value ?? 1,
       matWorldUniformLocation,
       matViewUniformLocation,
       matProjUniformLocation,
@@ -323,44 +327,46 @@ const createTwistyPuzzle = async (form) => {
 
   updateMatrix();
 
-  const getDrawMode = () => {
-    let drawMode = gl.TRIANGLES;
+  const drawMode = document.querySelector(`#draw-mode`);
 
-    switch (formData.get(`draw-mode`) ?? `triangles`) {
+  if (!drawMode) throw new Error(`Draw mode not found`);
+
+  const getDrawMode = () => {
+    let drawModeValue = gl.TRIANGLES;
+
+    switch (drawMode.value) {
       case `points`:
-        drawMode = gl.POINTS;
+        drawModeValue = gl.POINTS;
         break;
       case `lines`:
-        drawMode = gl.LINES;
+        drawModeValue = gl.LINES;
         break;
       case `line-loop`:
-        drawMode = gl.LINE_LOOP;
+        drawModeValue = gl.LINE_LOOP;
         break;
       case `line-strip`:
-        drawMode = gl.LINE_STRIP;
+        drawModeValue = gl.LINE_STRIP;
         break;
       case `triangle-strip`:
-        drawMode = gl.TRIANGLE_STRIP;
+        drawModeValue = gl.TRIANGLE_STRIP;
         break;
       case `triangle-fan`:
-        drawMode = gl.TRIANGLE_FAN;
+        drawModeValue = gl.TRIANGLE_FAN;
         break;
       case `triangles`:
-        drawMode = gl.TRIANGLES;
+        drawModeValue = gl.TRIANGLES;
         break;
       default:
-        drawMode = gl.TRIANGLES;
+        drawModeValue = gl.TRIANGLES;
         break;
     }
 
-    return drawMode;
+    return drawModeValue;
   }
-
-  const drawMode = getDrawMode();
 
   const draw = () => {
     gl.drawElements(
-      drawMode,
+      getDrawMode(),
       vertexIndices.length,
       gl.UNSIGNED_SHORT,
       0,
@@ -597,6 +603,16 @@ const createTwistyPuzzle = async (form) => {
   });
 
   farPlane.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  drawMode.addEventListener(`change`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  pointSize.addEventListener(`input`, () => {
     updateMatrix();
     draw();
   });
