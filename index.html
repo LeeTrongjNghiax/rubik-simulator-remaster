@@ -548,133 +548,6 @@
 
           <fieldset class="c-form__fieldset">
             <legend class="c-form__fieldset-legend">
-              Cubie Orientations
-            </legend>
-
-            <div class="c-form__input-group">
-              <label for="cubie-orientation-x">X:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="cubie-orientation-x-lower-bound"
-                  name="cubie-orientation-x-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="0.01"
-                  value="-3"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="cubie-orientation-x"
-                    name="cubie-orientation-x"
-                    class="c-slider-input__input-range"
-                    min="-10"
-                    max="10"
-                    step="0.01"
-                    value="-0.7"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="cubie-orientation-x-upper-bound"
-                  name="cubie-orientation-x-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="0.01"
-                  value="3"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="cubie-orientation-y">Y:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="cubie-orientation-y-lower-bound"
-                  name="cubie-orientation-y-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="0.01"
-                  value="-3"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="cubie-orientation-y"
-                    name="cubie-orientation-y"
-                    class="c-slider-input__input-range"
-                    min="-10"
-                    max="10"
-                    step="0.01"
-                    value="-0.6"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="cubie-orientation-y-upper-bound"
-                  name="cubie-orientation-y-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="0.01"
-                  value="3"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="cubie-orientation-z">Z:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="cubie-orientation-z-lower-bound"
-                  name="cubie-orientation-z-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="0.01"
-                  value="-3"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="cubie-orientation-z"
-                    name="cubie-orientation-z"
-                    class="c-slider-input__input-range"
-                    step="0.01"
-                    value="0"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="cubie-orientation-z-upper-bound"
-                  name="cubie-orientation-z-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="0.01"
-                  value="3"
-                >
-              </div>
-            </div>
-          </fieldset>
-
-          <fieldset class="c-form__fieldset">
-            <legend class="c-form__fieldset-legend">
               Cubie Length
             </legend>
 
@@ -1085,516 +958,8 @@
                 id="inner-cube-outer-color"
                 name="inner-cube-outer-color"
                 class="c-form__input-color"
-                value="#dd27ce"
+                value="#121212"
               >
-            </div>
-          </fieldset>
-
-          <fieldset class="c-form__fieldset">
-            <legend class="c-form__fieldset-legend">
-              Scene
-            </legend>
-
-            <div class="c-form__input-group">
-              <label for="field-of-view">Field of View:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="field-of-view-lower-bound"
-                  name="field-of-view-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="-180"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="field-of-view"
-                    name="field-of-view"
-                    class="c-slider-input__input-range"
-                    min="-180"
-                    max="180"
-                    step="1"
-                    value="45"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="field-of-view-upper-bound"
-                  name="field-of-view-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="180"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="near-plane">Near Plane:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="near-plane-lower-bound"
-                  name="near-plane-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="0.1"
-                  value="1"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="near-plane"
-                    name="near-plane"
-                    class="c-slider-input__input-range"
-                    step="0.1"
-                    value="0.1"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="near-plane-upper-bound"
-                  name="near-plane-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="0.1"
-                  value="20"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="far-plane">Far Plane:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="far-plane-lower-bound"
-                  name="far-plane-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="1"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="far-plane"
-                    name="far-plane"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="50"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="far-plane-upper-bound"
-                  name="far-plane-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="100"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="background-color">Background Color:</label>
-
-              <input
-                type="color"
-                id="background-color"
-                name="background-color"
-                class="c-form__input-color"
-                value="#090909"
-              >
-            </div>
-          </fieldset>
-
-          <fieldset class="c-form__fieldset">
-            <legend class="c-form__fieldset-legend">
-              Camera Positions
-            </legend>
-
-            <div class="c-form__input-group">
-              <label for="camera-position-x">X:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="camera-position-x-lower-bound"
-                  name="camera-position-x-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="-20"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="camera-position-x"
-                    name="camera-position-x"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="0"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="camera-position-x-upper-bound"
-                  name="camera-position-x-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="20"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="camera-position-y">Y:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="camera-position-y-lower-bound"
-                  name="camera-position-y-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="-20"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="camera-position-y"
-                    name="camera-position-y"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="0"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="camera-position-y-upper-bound"
-                  name="camera-position-y-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="20"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="camera-position-z">Z:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="camera-position-z-lower-bound"
-                  name="camera-position-z-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="-20"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="camera-position-z"
-                    name="camera-position-z"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    min="-100"
-                    max="100"
-                    value="-8"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="camera-position-z-upper-bound"
-                  name="camera-position-z-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="20"
-                >
-              </div>
-            </div>
-          </fieldset>
-
-          <fieldset class="c-form__fieldset">
-            <legend class="c-form__fieldset-legend">
-              Camera Look Ats
-            </legend>
-
-            <div class="c-form__input-group">
-              <label for="camera-look-at-x">X:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="camera-look-at-x-lower-bound"
-                  name="camera-look-at-x-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="-100"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="camera-look-at-x"
-                    name="camera-look-at-x"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="0"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="camera-look-at-x-upper-bound"
-                  name="camera-look-at-x-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="100"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="camera-look-at-y">Y:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="camera-look-at-y-lower-bound"
-                  name="camera-look-at-y-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="-100"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="camera-look-at-y"
-                    name="camera-look-at-y"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="0"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="camera-look-at-y-upper-bound"
-                  name="camera-look-at-y-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="100"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="camera-look-at-z">Z:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="camera-look-at-z-lower-bound"
-                  name="camera-look-at-z-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="-100"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="camera-look-at-z"
-                    name="camera-look-at-z"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="0"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="camera-look-at-z-upper-bound"
-                  name="camera-look-at-z-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="100"
-                >
-              </div>
-            </div>
-          </fieldset>
-
-          <fieldset class="c-form__fieldset">
-            <legend class="c-form__fieldset-legend">
-              Camera Up Axes
-            </legend>
-
-            <div class="c-form__input-group">
-              <label for="camera-up-axis-x">X:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="camera-up-axis-x-lower-bound"
-                  name="camera-up-axis-x-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="camera-up-axis-x"
-                    name="camera-up-axis-x"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="0"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="camera-up-axis-x-upper-bound"
-                  name="camera-up-axis-x-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="1"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="camera-up-axis-y">Y:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="camera-up-axis-y-lower-bound"
-                  name="camera-up-axis-y-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="camera-up-axis-y"
-                    name="camera-up-axis-y"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="1"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="camera-up-axis-y-upper-bound"
-                  name="camera-up-axis-y-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="1"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="camera-up-axis-z">Z:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="camera-up-axis-z-lower-bound"
-                  name="camera-up-axis-z-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="camera-up-axis-z"
-                    name="camera-up-axis-z"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="0"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="camera-up-axis-z-upper-bound"
-                  name="camera-up-axis-z-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="1"
-                >
-              </div>
             </div>
           </fieldset>
 
@@ -2019,88 +1384,722 @@
         </svg>
       </button>
 
-      <fieldset class="c-form__fieldset">
-        <legend class="c-form__fieldset-legend">
-          Miscellaneous
-        </legend>
+      <legend class="c-form__fieldset-legend">Miscellaneous</legend>
 
-        <div class="c-form__input-group">
-          <label for="load-rubik-form-preset">Load Rubik Form Preset</label>
+      <div class="c-form__fieldset-container u-flex-1">
+        <fieldset class="c-form__fieldset">
+          <div class="c-form__input-group">
+            <label for="load-rubik-form-preset">Load Rubik Form Preset</label>
 
-          <select
-            name="load-rubik-form-preset"
-            id="load-rubik-form-preset"
-            class="c-form__input-select"
+            <select
+              name="load-rubik-form-preset"
+              id="load-rubik-form-preset"
+              class="c-form__input-select"
+            >
+              <option value="">None</option>
+              <option value="2x2x2">2 x 2 x 2</option>
+              <option value="3x3x3">3 x 3 x 3</option>
+              <option value="4x4x4">4 x 4 x 4</option>
+              <option value="5x5x5">5 x 5 x 5</option>
+              <option value="6x6x6">6 x 6 x 6</option>
+              <option value="7x7x7">7 x 7 x 7</option>
+              <option value="domino-cube">Domino Cube</option>
+              <option value="tower-cube">Tower Cube</option>
+              <option value="windmill-cube">Windmill Cube</option>
+              <option value="mirrors-block">Mirror's Block</option>
+              <option value="void-cube">Void Cube</option>
+            </select>
+          </div>
+
+          <div 
+            class="c-form__input-group"
+            style="
+              --grid-template-columns: 1fr auto;
+              --grid-template-columns\@1024: 1fr auto;
+            "
           >
-            <option value="">None</option>
-            <option value="2x2x2">2 x 2 x 2</option>
-            <option value="3x3x3">3 x 3 x 3</option>
-            <option value="4x4x4">4 x 4 x 4</option>
-            <option value="5x5x5">5 x 5 x 5</option>
-            <option value="6x6x6">6 x 6 x 6</option>
-            <option value="7x7x7">7 x 7 x 7</option>
-            <option value="domino-cube">Domino Cube</option>
-            <option value="tower-cube">Tower Cube</option>
-            <option value="windmill-cube">Windmill Cube</option>
-            <option value="mirrors-block">Mirror's Block</option>
-            <option value="void-cube">Void Cube</option>
-          </select>
-        </div>
+            <label for="is-auto-update">Is Auto Update</label>
 
-        <div 
-          class="c-form__input-group"
-          style="
-            --grid-template-columns: 1fr auto;
-            --grid-template-columns\@1024: 1fr auto;
-          "
-        >
-          <label for="is-auto-update">Is Auto Update</label>
+            <input
+              type="checkbox"
+              id="is-auto-update"
+              name="is-auto-update"
+              class="c-form__input-checkbox"
+              checked
+            >
+          </div>
 
-          <input
-            type="checkbox"
-            id="is-auto-update"
-            name="is-auto-update"
-            class="c-form__input-checkbox"
-            checked
+          <div 
+            class="c-form__input-group"
+            style="
+              --grid-template-columns: 1fr auto;
+              --grid-template-columns\@1024: 1fr auto;
+            "
           >
-        </div>
+            <label for="toggle-controls">Toggle Show/Hide Controls</label>
 
-        <div 
-          class="c-form__input-group"
-          style="
-            --grid-template-columns: 1fr auto;
-            --grid-template-columns\@1024: 1fr auto;
-          "
-        >
-          <label for="toggle-controls">Toggle Show/Hide Controls</label>
+            <input
+              type="checkbox"
+              id="toggle-controls"
+              name="toggle-controls"
+              class="c-form__input-checkbox"
+            >
+          </div>
 
-          <input
-            type="checkbox"
-            id="toggle-controls"
-            name="toggle-controls"
-            class="c-form__input-checkbox"
+          <div 
+            class="c-form__input-group"
+            style="
+              --grid-template-columns: 1fr auto;
+              --grid-template-columns\@1024: 1fr auto;
+            "
           >
-        </div>
+            <label for="toggle-auto-scrambling">Toggle Auto Scrambling</label>
 
-        <div 
-          class="c-form__input-group"
-          style="
-            --grid-template-columns: 1fr auto;
-            --grid-template-columns\@1024: 1fr auto;
-          "
-        >
-          <label for="toggle-auto-scrambling">Toggle Auto Scrambling</label>
+            <input
+              type="checkbox"
+              id="toggle-auto-scrambling"
+              name="toggle-auto-scrambling"
+              class="c-form__input-checkbox"
+              checked
+            >
+          </div>
+        </fieldset>
 
-          <input
-            type="checkbox"
-            id="toggle-auto-scrambling"
-            name="toggle-auto-scrambling"
-            class="c-form__input-checkbox"
-            checked
-          >
-        </div>
-      </fieldset>
+        <fieldset class="c-form__fieldset">
+          <legend class="c-form__fieldset-legend">
+            Cubie Orientations
+          </legend>
 
+          <div class="c-form__input-group">
+            <label for="cubie-orientation-x">X:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="cubie-orientation-x-lower-bound"
+                name="cubie-orientation-x-lower-bound"
+                class="c-slider-input__input-lower"
+                step="0.01"
+                value="-3"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="cubie-orientation-x"
+                  name="cubie-orientation-x"
+                  class="c-slider-input__input-range"
+                  min="-10"
+                  max="10"
+                  step="0.01"
+                  value="-0.7"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="cubie-orientation-x-upper-bound"
+                name="cubie-orientation-x-upper-bound"
+                class="c-slider-input__input-upper"
+                step="0.01"
+                value="3"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="cubie-orientation-y">Y:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="cubie-orientation-y-lower-bound"
+                name="cubie-orientation-y-lower-bound"
+                class="c-slider-input__input-lower"
+                step="0.01"
+                value="-3"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="cubie-orientation-y"
+                  name="cubie-orientation-y"
+                  class="c-slider-input__input-range"
+                  min="-10"
+                  max="10"
+                  step="0.01"
+                  value="-0.6"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="cubie-orientation-y-upper-bound"
+                name="cubie-orientation-y-upper-bound"
+                class="c-slider-input__input-upper"
+                step="0.01"
+                value="3"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="cubie-orientation-z">Z:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="cubie-orientation-z-lower-bound"
+                name="cubie-orientation-z-lower-bound"
+                class="c-slider-input__input-lower"
+                step="0.01"
+                value="-3"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="cubie-orientation-z"
+                  name="cubie-orientation-z"
+                  class="c-slider-input__input-range"
+                  step="0.01"
+                  value="0"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="cubie-orientation-z-upper-bound"
+                name="cubie-orientation-z-upper-bound"
+                class="c-slider-input__input-upper"
+                step="0.01"
+                value="3"
+              >
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="c-form__fieldset">
+          <legend class="c-form__fieldset-legend">
+            Camera Positions
+          </legend>
+
+          <div class="c-form__input-group">
+            <label for="camera-position-x">X:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-position-x-lower-bound"
+                name="camera-position-x-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="-20"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-position-x"
+                  name="camera-position-x"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="0"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-position-x-upper-bound"
+                name="camera-position-x-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="20"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="camera-position-y">Y:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-position-y-lower-bound"
+                name="camera-position-y-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="-20"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-position-y"
+                  name="camera-position-y"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="0"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-position-y-upper-bound"
+                name="camera-position-y-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="20"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="camera-position-z">Z:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-position-z-lower-bound"
+                name="camera-position-z-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="-20"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-position-z"
+                  name="camera-position-z"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  min="-100"
+                  max="100"
+                  value="-8"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-position-z-upper-bound"
+                name="camera-position-z-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="20"
+              >
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="c-form__fieldset">
+          <legend class="c-form__fieldset-legend">
+            Camera Look Ats
+          </legend>
+
+          <div class="c-form__input-group">
+            <label for="camera-look-at-x">X:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-look-at-x-lower-bound"
+                name="camera-look-at-x-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="-100"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-look-at-x"
+                  name="camera-look-at-x"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="0"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-look-at-x-upper-bound"
+                name="camera-look-at-x-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="100"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="camera-look-at-y">Y:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-look-at-y-lower-bound"
+                name="camera-look-at-y-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="-100"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-look-at-y"
+                  name="camera-look-at-y"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="0"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-look-at-y-upper-bound"
+                name="camera-look-at-y-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="100"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="camera-look-at-z">Z:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-look-at-z-lower-bound"
+                name="camera-look-at-z-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="-100"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-look-at-z"
+                  name="camera-look-at-z"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="0"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-look-at-z-upper-bound"
+                name="camera-look-at-z-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="100"
+              >
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="c-form__fieldset">
+          <legend class="c-form__fieldset-legend">
+            Camera Up Axes
+          </legend>
+
+          <div class="c-form__input-group">
+            <label for="camera-up-axis-x">X:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-up-axis-x-lower-bound"
+                name="camera-up-axis-x-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="0"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-up-axis-x"
+                  name="camera-up-axis-x"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="0"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-up-axis-x-upper-bound"
+                name="camera-up-axis-x-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="1"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="camera-up-axis-y">Y:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-up-axis-y-lower-bound"
+                name="camera-up-axis-y-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="0"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-up-axis-y"
+                  name="camera-up-axis-y"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="1"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-up-axis-y-upper-bound"
+                name="camera-up-axis-y-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="1"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="camera-up-axis-z">Z:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-up-axis-z-lower-bound"
+                name="camera-up-axis-z-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="0"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-up-axis-z"
+                  name="camera-up-axis-z"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="0"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-up-axis-z-upper-bound"
+                name="camera-up-axis-z-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="1"
+              >
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="c-form__fieldset">
+          <legend class="c-form__fieldset-legend">
+            Scene
+          </legend>
+
+          <div class="c-form__input-group">
+            <label for="field-of-view">Field of View:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="field-of-view-lower-bound"
+                name="field-of-view-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="-180"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="field-of-view"
+                  name="field-of-view"
+                  class="c-slider-input__input-range"
+                  min="-180"
+                  max="180"
+                  step="1"
+                  value="45"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="field-of-view-upper-bound"
+                name="field-of-view-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="180"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="near-plane">Near Plane:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="near-plane-lower-bound"
+                name="near-plane-lower-bound"
+                class="c-slider-input__input-lower"
+                step="0.1"
+                value="1"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="near-plane"
+                  name="near-plane"
+                  class="c-slider-input__input-range"
+                  step="0.1"
+                  value="0.1"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="near-plane-upper-bound"
+                name="near-plane-upper-bound"
+                class="c-slider-input__input-upper"
+                step="0.1"
+                value="20"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="far-plane">Far Plane:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="far-plane-lower-bound"
+                name="far-plane-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="1"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="far-plane"
+                  name="far-plane"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="50"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="far-plane-upper-bound"
+                name="far-plane-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="100"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="background-color">Background Color:</label>
+
+            <input
+              type="color"
+              id="background-color"
+              name="background-color"
+              class="c-form__input-color"
+              value="#090909"
+            >
+          </div>
+        </fieldset>
+      </div>
     </aside>
 
     <hgroup class="c-title-container">

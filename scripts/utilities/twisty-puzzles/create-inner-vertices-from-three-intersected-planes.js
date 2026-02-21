@@ -6,17 +6,38 @@ const createInnerVerticesFromThreeIntersectedPlanes = ({
   planesB,
   planesC,
   isRenderCenterInnerOuterCubes = true,
-  isRenderCornerInnerOuterCubes = false,
-  isRenderEdgeInnerOuterCubes = false,
+  isRenderCornerInnerOuterCubes = true,
+  isRenderEdgeInnerOuterCubes = true,
 }) => {
   const vertices = [];
 
   for (let i = 0; i < planesA.length; i++) {
     for (let j = 0; j < planesB.length; j++) {
       for (let k = 0; k < planesC.length; k++) {
-        const isRenderCenterInnerOuterCube = isRenderCenterInnerOuterCubes
+
+        const isRenderCenterInnerOuterCubeX = isRenderCenterInnerOuterCubes
           ? true
           : true;
+          // : (
+          //   (j < 2 || j > planesB.length - 1 - 2) ||
+          //   (k < 2 || k > planesC.length - 1 - 2)
+          // );
+
+        const isRenderCenterInnerOuterCubeY = isRenderCenterInnerOuterCubes
+          ? true
+          : true;
+          // : (
+          //   (i < 2 || i > planesA.length - 1 - 2) ||
+          //   (k < 2 || k > planesC.length - 1 - 2)
+          // );
+
+        const isRenderCenterInnerOuterCubeZ = isRenderCenterInnerOuterCubes
+          ? true
+          : true;
+          // : (
+          //   (i < 2 || i > planesA.length - 1 - 2) ||
+          //   (j < 2 || j > planesB.length - 1 - 2)
+          // );
 
         const isRenderCornerInnerOuterCube = isRenderCornerInnerOuterCubes
           ? true
@@ -26,14 +47,39 @@ const createInnerVerticesFromThreeIntersectedPlanes = ({
             (k < 2 || k > planesC.length - 1 - 2)
           );
 
-        const isRenderEdgeInnerOuterCube = isRenderEdgeInnerOuterCubes
+        const isRenderEdgeInnerOuterCubeX = isRenderEdgeInnerOuterCubes
           ? true
           : true;
+          // : (
+          //   ( !(j < 2 || j > planesB.length - 1 - 2) ||
+          //   (  (j < 2 || j > planesB.length - 1 - 2) && (k < 2 || k > planesC.length - 1 - 2) ) ) &&
+          //   ( !(k < 2 || k > planesC.length - 1 - 2) ||
+          //   (  (k < 2 || k > planesC.length - 1 - 2) && (j < 2 || j > planesB.length - 1 - 2) ) )
+          // );
+
+        const isRenderEdgeInnerOuterCubeY = isRenderEdgeInnerOuterCubes
+          ? true
+          : true;
+          // : (
+          //   ( !(i < 2 || i > planesA.length - 1 - 2) ||
+          //   (  (i < 2 || i > planesA.length - 1 - 2) && (k < 2 || k > planesC.length - 1 - 2) ) ) &&
+          //   ( !(k < 2 || k > planesC.length - 1 - 2) ||
+          //   (  (k < 2 || k > planesC.length - 1 - 2) && (i < 2 || i > planesA.length - 1 - 2) ) )
+          // );
+
+        const isRenderEdgeInnerOuterCubeZ = isRenderEdgeInnerOuterCubes
+          ? true
+          : true;
+          // : (
+          //   ( !(i == 0 || i == 1 || i == 4 || i == 5 ) ) 
+          //   // ||
+          //   // (  (i < 2 || i > planesA.length - 1 - 2) && (j < 2 || j > planesB.length - 1 - 2) ) )
+          // );
 
         if (
-          isRenderCenterInnerOuterCube &&
+          isRenderCenterInnerOuterCubeX &&
           isRenderCornerInnerOuterCube &&
-          isRenderEdgeInnerOuterCube
+          isRenderEdgeInnerOuterCubeX
         ) {
           vertices.push(
             createVertexFromThreeIntersectedPlanes({
@@ -47,7 +93,13 @@ const createInnerVerticesFromThreeIntersectedPlanes = ({
               plane: planesA[i],
             })
           );
+        }
 
+        if (
+          isRenderCenterInnerOuterCubeY &&
+          isRenderCornerInnerOuterCube &&
+          isRenderEdgeInnerOuterCubeY
+        ) {
           vertices.push(
             createVertexFromThreeIntersectedPlanes({
               twistyPuzzle,
@@ -60,7 +112,13 @@ const createInnerVerticesFromThreeIntersectedPlanes = ({
               plane: planesB[j],
             })
           );
+        }
 
+        if (
+          isRenderCenterInnerOuterCubeZ &&
+          isRenderCornerInnerOuterCube &&
+          isRenderEdgeInnerOuterCubeZ
+        ) {
           vertices.push(
             createVertexFromThreeIntersectedPlanes({
               twistyPuzzle,

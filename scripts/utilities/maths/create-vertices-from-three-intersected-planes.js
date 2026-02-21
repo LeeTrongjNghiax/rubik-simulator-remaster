@@ -23,18 +23,18 @@ const createVerticesFromThreeIntersectedPlanes = ({
             (k < 3 || k > planesC.length - 1 - 3)
           );
 
-        const isRenderCenterStickerZ = isRenderCenterStickers
-          ? true
-          : (
-            (i < 3 || i > planesA.length - 1 - 3) ||
-            (j < 3 || j > planesB.length - 1 - 3)
-          );
-
         const isRenderCenterStickerY = isRenderCenterStickers
           ? true
           : (
             (i < 3 || i > planesA.length - 1 - 3) ||
             (k < 3 || k > planesC.length - 1 - 3)
+          );
+
+        const isRenderCenterStickerZ = isRenderCenterStickers
+          ? true
+          : (
+            (i < 3 || i > planesA.length - 1 - 3) ||
+            (j < 3 || j > planesB.length - 1 - 3)
           );
 
         const isRenderCornerSticker = isRenderCornerStickers
@@ -49,27 +49,27 @@ const createVerticesFromThreeIntersectedPlanes = ({
           ? true
           : (
             ( !(j < 3 || j > planesB.length - 1 - 3) ||
-            ( (j < 3 || j > planesA.length - 1 - 3) && (k < 3 || k > planesC.length - 1 - 3) ) ) &&
+            (  (j < 3 || j > planesA.length - 1 - 3) && (k < 3 || k > planesC.length - 1 - 3) ) ) &&
             ( !(k < 3 || k > planesC.length - 1 - 3) ||
-            ( (k < 3 || k > planesC.length - 1 - 3) && (j < 3 || j > planesB.length - 1 - 3) ) )
+            (  (k < 3 || k > planesC.length - 1 - 3) && (j < 3 || j > planesB.length - 1 - 3) ) )
           );
 
         const isRenderEdgeStickerY = isRenderEdgeStickers
           ? true
           : (
             ( !(i < 3 || i > planesA.length - 1 - 3) ||
-            ( (i < 3 || i > planesA.length - 1 - 3) && (k < 3 || k > planesC.length - 1 - 3) ) ) &&
+            (  (i < 3 || i > planesA.length - 1 - 3) && (k < 3 || k > planesC.length - 1 - 3) ) ) &&
             ( !(k < 3 || k > planesC.length - 1 - 3) ||
-            ( (k < 3 || k > planesC.length - 1 - 3) && (i < 3 || i > planesA.length - 1 - 3) ) )
+            (  (k < 3 || k > planesC.length - 1 - 3) && (i < 3 || i > planesA.length - 1 - 3) ) )
           );
 
         const isRenderEdgeStickerZ = isRenderEdgeStickers
           ? true
           : (
             ( !(i < 3 || i > planesA.length - 1 - 3) ||
-            ( (i < 3 || i > planesA.length - 1 - 3) && (j < 3 || j > planesB.length - 1 - 3) ) ) &&
+            (  (i < 3 || i > planesA.length - 1 - 3) && (j < 3 || j > planesB.length - 1 - 3) ) ) &&
             ( !(j < 3 || j > planesB.length - 1 - 3) ||
-            ( (j < 3 || j > planesA.length - 1 - 3) && (i < 3 || i > planesA.length - 1 - 3) ) )
+            (  (j < 3 || j > planesA.length - 1 - 3) && (i < 3 || i > planesA.length - 1 - 3) ) )
           );
 
         if (

@@ -46,10 +46,14 @@ const createTwistyPuzzle = async (form) => {
 
   const gl = createWebGLRenderingContext(canvas);
 
+  const backgroundColor = document.querySelector(`#background-color`);
+
+  if (!backgroundColor) throw new Error(`Background Color not found`);
+
   resetWebGL({
     webGLContext: gl,
     canvas,
-    backgroundColor: formData.get(`background-color`) ? hexColorToUnitColor(formData.get(`background-color`)) : [0, 0, 0],
+    backgroundColor: backgroundColor.value ? hexColorToUnitColor(backgroundColor.value) : [0, 0, 0],
   });
 
   setUpWebGL(gl);
@@ -224,36 +228,100 @@ const createTwistyPuzzle = async (form) => {
     planeBUniformLocation,
   } = getUniformsInShader(gl, shaderProgram);
 
-  const { matWorld, matView, matProjection } = createSupportMatrix({
-    orientationX: +formData.get(`cubie-orientation-x`) ?? 0,
-    orientationY: +formData.get(`cubie-orientation-y`) ?? 0,
-    orientationZ: +formData.get(`cubie-orientation-z`) ?? 0,
-    cameraPositionX: +formData.get(`camera-position-x`) ?? 0,
-    cameraPositionY: +formData.get(`camera-position-y`) ?? 0,
-    cameraPositionZ: +formData.get(`camera-position-z`) ?? -30,
-    cameraLookAtX: +formData.get(`camera-look-at-position-x`) ?? 0,
-    cameraLookAtY: +formData.get(`camera-look-at-position-y`) ?? 1,
-    cameraLookAtZ: +formData.get(`camera-look-at-position-z`) ?? 0,
-    cameraUpX: +formData.get(`camera-up-axis-x`) ?? 0,
-    cameraUpY: +formData.get(`camera-up-axis-y`) ?? 1,
-    cameraUpZ: +formData.get(`camera-up-axis-z`) ?? 0,
-    fieldOfView: +formData.get(`field-of-view`) ? degreeToRadian(+formData.get(`field-of-view`)) : 45,
-    aspectRatio: canvas.width / canvas.height,
-    nearPlane: +formData.get(`near-plane`) ?? 0.1,
-    farPlane: +formData.get(`far-plane`) ?? 100,
-  });
+  const orientationX = document.querySelector(`#cubie-orientation-x`);
 
-  addUniformsToShader({
-    gl,
-    matWorld,
-    matView,
-    matProj: matProjection,
-    pointSize: +formData.get(`point-size`) ?? 1,
-    matWorldUniformLocation,
-    matViewUniformLocation,
-    matProjUniformLocation,
-    pointSizeUniformLocation,
-  });
+  if (!orientationX) throw new Error(`Orientation X not found`);
+
+  const orientationY = document.querySelector(`#cubie-orientation-y`);
+
+  if (!orientationY) throw new Error(`Orientation Y not found`);
+
+  const orientationZ = document.querySelector(`#cubie-orientation-z`);
+
+  if (!orientationZ) throw new Error(`Orientation Z not found`);
+
+  const cameraPositionX = document.querySelector(`#camera-position-x`);
+
+  if (!cameraPositionX) throw new Error(`Camera Position X not found`);
+
+  const cameraPositionY = document.querySelector(`#camera-position-y`);
+
+  if (!cameraPositionY) throw new Error(`Camera Position Y not found`);
+
+  const cameraPositionZ = document.querySelector(`#camera-position-z`);
+
+  if (!cameraPositionZ) throw new Error(`Camera Position Z not found`);
+
+  const fieldOfView = document.querySelector(`#field-of-view`);
+
+  if (!fieldOfView) throw new Error(`Field Of View not found`);
+
+  const nearPlane = document.querySelector(`#near-plane`);
+
+  if (!nearPlane) throw new Error(`Near Plane not found`);
+
+  const farPlane = document.querySelector(`#far-plane`);
+
+  if (!farPlane) throw new Error(`Far Plane not found`);
+
+  const cameraLookAtX = document.querySelector(`#camera-look-at-x`);
+
+  if (!cameraLookAtX) throw new Error(`Camera Look At X not found`);
+
+  const cameraLookAtY = document.querySelector(`#camera-look-at-y`);
+
+  if (!cameraLookAtY) throw new Error(`Camera Look At Y not found`);
+
+  const cameraLookAtZ = document.querySelector(`#camera-look-at-z`);
+
+  if (!cameraLookAtZ) throw new Error(`Camera Look At Z not found`);
+
+  const cameraUpX = document.querySelector(`#camera-up-axis-x`);
+
+  if (!cameraUpX) throw new Error(`Camera Up Axis X not found`);
+
+  const cameraUpY = document.querySelector(`#camera-up-axis-y`);
+
+  if (!cameraUpY) throw new Error(`Camera Up Axis Y not found`);
+
+  const cameraUpZ = document.querySelector(`#camera-up-axis-z`);
+
+  if (!cameraUpZ) throw new Error(`Camera Up Axis Z not found`);
+
+  const updateMatrix = () => {
+    const { matWorld, matView, matProjection } = createSupportMatrix({
+      orientationX: +orientationX.value ?? 0,
+      orientationY: +orientationY.value ?? 0,
+      orientationZ: +orientationZ.value ?? 0,
+      cameraPositionX: +cameraPositionX.value ?? 0,
+      cameraPositionY: +cameraPositionY.value ?? 0,
+      cameraPositionZ: +cameraPositionZ.value ?? -30,
+      cameraLookAtX: +cameraLookAtX.value ?? 0,
+      cameraLookAtY: +cameraLookAtY.value ?? 1,
+      cameraLookAtZ: +cameraLookAtZ.value ?? 0,
+      cameraUpX: +cameraUpX.value ?? 0,
+      cameraUpY: +cameraUpY.value ?? 1,
+      cameraUpZ: +cameraUpZ.value ?? 0,
+      fieldOfView: +fieldOfView.value ? degreeToRadian(+fieldOfView.value) : 45,
+      aspectRatio: canvas.width / canvas.height,
+      nearPlane: +nearPlane.value ?? 0.1,
+      farPlane: +farPlane.value ?? 100,
+    });
+
+    addUniformsToShader({
+      gl,
+      matWorld,
+      matView,
+      matProj: matProjection,
+      pointSize: +formData.get(`point-size`) ?? 1,
+      matWorldUniformLocation,
+      matViewUniformLocation,
+      matProjUniformLocation,
+      pointSizeUniformLocation,
+    });
+  }
+
+  updateMatrix();
 
   const getDrawMode = () => {
     let drawMode = gl.TRIANGLES;
@@ -290,7 +358,7 @@ const createTwistyPuzzle = async (form) => {
 
   const drawMode = getDrawMode();
 
-  if (vertexIndices.length > 0) {
+  const draw = () => {
     gl.drawElements(
       drawMode,
       vertexIndices.length,
@@ -298,6 +366,8 @@ const createTwistyPuzzle = async (form) => {
       0,
     );
   }
+
+  if (vertexIndices.length > 0) draw();
 
   const controllerContainer = document.querySelector(`.c-controller-container`);
 
@@ -366,14 +436,10 @@ const createTwistyPuzzle = async (form) => {
       resetWebGL({
         webGLContext: gl,
         canvas,
-        backgroundColor: formData.get(`background-color`) ? hexColorToUnitColor(formData.get(`background-color`)) : [0, 0, 0],
+        backgroundColor: backgroundColor.value ? hexColorToUnitColor(backgroundColor.value) : [0, 0, 0],
       });
 
-      gl.drawElements(
-        drawMode,
-        vertexIndices.length, 
-        gl.UNSIGNED_SHORT, 0
-      );
+      draw();
 
       if ( Math.abs( angleToRotate - control.rad ) <= EPSILON ) {
         rubik.rotateFace(
@@ -459,6 +525,81 @@ const createTwistyPuzzle = async (form) => {
       cancelAnimationFrame(loopTimeout);
     }
   });
+
+  orientationX.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  orientationY.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  orientationZ.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  cameraPositionX.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  cameraPositionY.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  cameraPositionZ.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  cameraLookAtX.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  cameraLookAtY.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  cameraLookAtZ.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  cameraUpX.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  cameraUpY.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  cameraUpZ.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  fieldOfView.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  nearPlane.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  farPlane.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
 }
 
 const initiateForm = () => {
@@ -477,6 +618,18 @@ const initiateForm = () => {
 
   if (!loadRubikFormPreset) throw new Error(`Load rubik form preset not found`);
 
+  const cameraPositionX = document.querySelector(`#camera-position-x`);
+
+  if (!cameraPositionX) throw new Error(`Camera Position X not found`);
+
+  const cameraPositionY = document.querySelector(`#camera-position-y`);
+
+  if (!cameraPositionY) throw new Error(`Camera Position Y not found`);
+
+  const cameraPositionZ = document.querySelector(`#camera-position-z`);
+
+  if (!cameraPositionZ) throw new Error(`Camera Position Z not found`);
+
   loadRubikFormPreset.addEventListener(`change`, (event) => {
     const preset = event.target.value;
     
@@ -494,9 +647,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -5;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -5;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -519,9 +672,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -10;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -10;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -544,9 +697,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -12;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -12;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -569,9 +722,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -14;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -14;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -594,9 +747,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -16;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -16;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -619,9 +772,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -8;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -8;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -644,9 +797,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -8;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -8;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -669,9 +822,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0.5;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -8;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -8;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -690,9 +843,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -10;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -10;
 
         form.querySelector(`#sticker-color-up`).value = `#c0c0c0`;
         form.querySelector(`#sticker-color-down`).value = `#c0c0c0`;
@@ -716,9 +869,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -8;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -8;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -744,9 +897,9 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        form.querySelector(`#camera-position-x`).value = 0;
-        form.querySelector(`#camera-position-y`).value = 0;
-        form.querySelector(`#camera-position-z`).value = -8;
+        cameraPositionX.value = 0;
+        cameraPositionY.value = 0;
+        cameraPositionZ.value = -8;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
