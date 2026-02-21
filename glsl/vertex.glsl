@@ -16,15 +16,6 @@ uniform float rad;
 uniform vec4 plane1; 
 uniform vec4 plane2; 
 
-mat4 create_identity_matrix() {
-  mat4 iden;
-  iden[0] = vec4(1.0,  .0,  .0,  .0);
-  iden[1] = vec4( .0, 1.0,  .0,  .0);
-  iden[2] = vec4( .0,  .0, 1.0,  .0);
-  iden[3] = vec4( .0,  .0,  .0, 1.0);
-  return iden;
-}
-
 float get_dot_product_of_plane_and_vector(vec3 point, vec4 plane) {
   return dot(point.xyz, plane.xyz) + plane.w;
 }
@@ -36,8 +27,7 @@ bool check_if_point_between_2_planes(vec3 point, vec4 plane1, vec4 plane2) {
   float sign1 = sign(dis1);
   float sign2 = sign(dis2);
 
-  if (sign1 != sign2)
-    return true;
+  if (sign1 != sign2) return true;
 
   return false;
 }
@@ -82,10 +72,19 @@ mat4 create_rotation_matrix_around_axis(vec3 axis, float rad) {
 }
 
 mat4 check_vertex(vec4 plane1, vec4 plane2, vec3 vertex, vec3 axis_vector, float rad) {
-  if ( check_if_point_between_2_planes(vertex, plane1, plane2) )
+  if ( check_if_point_between_2_planes(vertex, plane1, plane2) ) {
     return create_rotation_matrix_around_axis(axis_vector, rad);
-  else 
-    return create_identity_matrix();
+  }
+  else {
+    mat4 identity;
+
+    identity[0] = vec4(1.0,  .0,  .0,  .0);
+    identity[1] = vec4( .0, 1.0,  .0,  .0);
+    identity[2] = vec4( .0,  .0, 1.0,  .0);
+    identity[3] = vec4( .0,  .0,  .0, 1.0);
+
+    return identity;
+  }
 }
 
 void main() { 

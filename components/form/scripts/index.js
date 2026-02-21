@@ -109,8 +109,6 @@ const createTwistyPuzzle = async (form) => {
     axisRotationZ: +formData.get(`sticker-container-rotation-z`) ?? 0,
   });
 
-  // console.log(Object.fromEntries(formData));
-
   const [planesX, planesY, planesZ] = createStickerPlanes({
     planeMatrix,
     startWidth: startOfX,
@@ -220,10 +218,6 @@ const createTwistyPuzzle = async (form) => {
   gl.useProgram(shaderProgram);
 
   const {
-    pointSizeUniformLocation,
-    matWorldUniformLocation,
-    matViewUniformLocation,
-    matProjUniformLocation,
     axisVectorUniformLocation,
     radUniformLocation,
     planeAUniformLocation,
@@ -316,6 +310,13 @@ const createTwistyPuzzle = async (form) => {
 
     angleRotatedRatioPerFrameValue = +angleRotatedRatioPerFrame.value;
     smoothRotationPerFrameValue = +smoothRotationPerFrame.value;
+
+    const {
+      pointSizeUniformLocation,
+      matWorldUniformLocation,
+      matViewUniformLocation,
+      matProjUniformLocation,
+    } = getUniformsInShader(gl, shaderProgram);
 
     const { matWorld, matView, matProjection } = createSupportMatrix({
       orientationX: +orientationX.value ?? 0,
@@ -511,21 +512,19 @@ const createTwistyPuzzle = async (form) => {
 
   if (!toggleAutoScrambling) throw new Error(`Toggle auto scrambling not found`);
 
-  if (toggleAutoScrambling.checked) {
-    cancelAnimationFrame(loopTimeout);
+  const loop = () => {
+    loopTimeout = requestAnimationFrame(loop);
 
-    const loop = () => {
-      loopTimeout = requestAnimationFrame(loop);
+    const randomControlName = rubik.controls[
+      Math.floor(Math.random() * rubik.controls.length)
+    ].name;
 
-      const randomControlName = rubik.controls[
-        Math.floor(Math.random() * rubik.controls.length)
-      ].name;
-
-      if (!randomControlName) return;
-
-      rotateTillDone(randomControlName);
-    }
+    if (!randomControlName) return;
     
+    rotateTillDone(randomControlName);
+  }
+    
+  if (toggleAutoScrambling.checked) {
     loop();
   } else {
     cancelAnimationFrame(loopTimeout);
