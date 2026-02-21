@@ -41,14 +41,16 @@ const createTwistyPuzzle = async (form) => {
 
   if (!canvas) throw new Error(`Canvas not found`);
 
-  canvas.width = +formData.get(`canvas-resolution`) ?? 500;
-  canvas.height = +formData.get(`canvas-resolution`) ?? 500;
-
   const gl = createWebGLRenderingContext(canvas);
 
   const backgroundColor = document.querySelector(`#background-color`);
 
   if (!backgroundColor) throw new Error(`Background Color not found`);
+
+  const isDarkMode = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)');
+
+  if (isDarkMode.matches) backgroundColor.value = `#090909`;
+  else backgroundColor.value = `#efefef`;
 
   resetWebGL({
     webGLContext: gl,
@@ -292,7 +294,29 @@ const createTwistyPuzzle = async (form) => {
 
   if (!pointSize) throw new Error(`Point size not found`);
 
+  const canvasResolution = document.querySelector(`#canvas-resolution`);
+
+  if (!canvasResolution) throw new Error(`Canvas resolution not found`);
+
+  const angleRotatedRatioPerFrame = document.querySelector(`#angle-rotated-ratio-per-frame`);
+
+  if (!angleRotatedRatioPerFrame) throw new Error(`Angle rotated ratio per frame not found`);
+
+  const smoothRotationPerFrame = document.querySelector(`#smooth-rotation-per-frame`);
+
+  if (!smoothRotationPerFrame) throw new Error(`Smooth rotation per frame not found`);
+
+  let angleRotatedRatioPerFrameValue = +angleRotatedRatioPerFrame.value;
+
+  let smoothRotationPerFrameValue = +smoothRotationPerFrame.value;
+
   const updateMatrix = () => {
+    canvas.width = +canvasResolution.value ?? 500;
+    canvas.height = +canvasResolution.value ?? 500;
+
+    angleRotatedRatioPerFrameValue = +angleRotatedRatioPerFrame.value;
+    smoothRotationPerFrameValue = +smoothRotationPerFrame.value;
+
     const { matWorld, matView, matProjection } = createSupportMatrix({
       orientationX: +orientationX.value ?? 0,
       orientationY: +orientationY.value ?? 0,
@@ -398,10 +422,7 @@ const createTwistyPuzzle = async (form) => {
 
     let angleToRotate = 0;
 
-    const step = control.rad / (+formData.get(`angle-rotated-ratio-per-frame`) 
-      ? (+formData.get(`angle-rotated-ratio-per-frame`))
-      : 10
-    );
+    const step = control.rad / angleRotatedRatioPerFrameValue;
 
     let newVertices = [...vertices];
 
@@ -467,7 +488,7 @@ const createTwistyPuzzle = async (form) => {
         isRotating = false;
         clearInterval(rotateInterval);
       }
-    }, +formData.get(`smooth-rotation-per-frame`) ?? 100);
+    }, smoothRotationPerFrameValue);
   }
 
   rubik.controls.forEach((control) => {
@@ -615,6 +636,19 @@ const createTwistyPuzzle = async (form) => {
   pointSize.addEventListener(`input`, () => {
     updateMatrix();
     draw();
+  });
+
+  canvasResolution.addEventListener(`input`, () => {
+    updateMatrix();
+    draw();
+  });
+
+  angleRotatedRatioPerFrame.addEventListener(`input`, () => {
+    updateMatrix();
+  });
+
+  smoothRotationPerFrame.addEventListener(`input`, () => {
+    updateMatrix();
   });
 }
 

@@ -1123,185 +1123,6 @@
               >
             </div>
           </fieldset>
-                    
-          <fieldset class="c-form__fieldset">
-            <legend class="c-form__fieldset-legend">
-              Frame 
-            </legend>
-
-            <div
-              class="c-form__input-group"
-              style="--grid-template-columns\@1024: 1fr;"
-            >
-              <label for="smooth-rotation-per-frame">
-                Smooth Rotation Per Frame:
-              </label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="smooth-rotation-per-frame-lower-bound"
-                  name="smooth-rotation-per-frame-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="smooth-rotation-per-frame"
-                    name="smooth-rotation-per-frame"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="5"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="smooth-rotation-per-frame-upper-bound"
-                  name="smooth-rotation-per-frame-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="100"
-                >
-              </div>
-            </div>
-
-            <div
-              class="c-form__input-group"
-              style="--grid-template-columns\@1024: 1fr;"
-            >
-              <label for="angle-rotated-ratio-per-frame">
-                Angle Rotated Ratio Per Frame:
-              </label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="angle-rotated-ratio-per-frame-lower-bound"
-                  name="angle-rotated-ratio-per-frame-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="angle-rotated-ratio-per-frame"
-                    name="angle-rotated-ratio-per-frame"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="20"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="angle-rotated-ratio-per-frame-upper-bound"
-                  name="angle-rotated-ratio-per-frame-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="100"
-                >
-              </div>
-            </div>
-          </fieldset>
-                    
-          <fieldset class="c-form__fieldset">
-            <legend class="c-form__fieldset-legend">
-              Canvas
-            </legend>
-
-            <div class="c-form__input-group">
-              <label for="canvas-resolution">Canvas Resolution:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="canvas-resolution-lower-bound"
-                  name="canvas-resolution-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="canvas-resolution"
-                    name="canvas-resolution"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    max="1000"
-                    value="1000"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="canvas-resolution-upper-bound"
-                  name="canvas-resolution-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="2000"
-                >
-              </div>
-            </div>
-
-            <div class="c-form__input-group">
-              <label for="canvas-width">Canvas Width:</label>
-
-              <div class="c-slider-input u-flex-1">
-                <input
-                  type="number"
-                  id="canvas-width-lower-bound"
-                  name="canvas-width-lower-bound"
-                  class="c-slider-input__input-lower"
-                  step="1"
-                  value="0"
-                >
-
-                <div class="c-slider-input__input-range-container">
-                  <input
-                    type="range"
-                    id="canvas-width"
-                    name="canvas-width"
-                    class="c-slider-input__input-range"
-                    step="1"
-                    value="300"
-                  >
-
-                  <div class="c-slider-input__input-range-value">
-                    -
-                  </div>
-                </div>
-
-                <input
-                  type="number"
-                  id="canvas-width-upper-bound"
-                  name="canvas-width-upper-bound"
-                  class="c-slider-input__input-upper"
-                  step="1"
-                  value="10000"
-                >
-              </div>
-            </div>
-          </fieldset>
         </div>
       </form>
 
@@ -2100,6 +1921,185 @@
                 type="number"
                 id="point-size-upper-bound"
                 name="point-size-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="100"
+              >
+            </div>
+          </div>
+        </fieldset>
+
+        <fieldset class="c-form__fieldset">
+          <legend class="c-form__fieldset-legend">
+            Canvas
+          </legend>
+
+          <div class="c-form__input-group">
+            <label for="canvas-resolution">Canvas Resolution:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="canvas-resolution-lower-bound"
+                name="canvas-resolution-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="0"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="canvas-resolution"
+                  name="canvas-resolution"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  max="1000"
+                  value="1000"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="canvas-resolution-upper-bound"
+                name="canvas-resolution-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="2000"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="canvas-width">Canvas Width:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="canvas-width-lower-bound"
+                name="canvas-width-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="0"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="canvas-width"
+                  name="canvas-width"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="300"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="canvas-width-upper-bound"
+                name="canvas-width-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="10000"
+              >
+            </div>
+          </div>
+        </fieldset>
+                    
+        <fieldset class="c-form__fieldset">
+          <legend class="c-form__fieldset-legend">
+            Frame 
+          </legend>
+
+          <div
+            class="c-form__input-group"
+            style="--grid-template-columns\@1024: 1fr;"
+          >
+            <label for="smooth-rotation-per-frame">
+              Smooth Rotation Per Frame:
+            </label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="smooth-rotation-per-frame-lower-bound"
+                name="smooth-rotation-per-frame-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="0"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="smooth-rotation-per-frame"
+                  name="smooth-rotation-per-frame"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="5"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="smooth-rotation-per-frame-upper-bound"
+                name="smooth-rotation-per-frame-upper-bound"
+                class="c-slider-input__input-upper"
+                step="1"
+                value="100"
+              >
+            </div>
+          </div>
+
+          <div
+            class="c-form__input-group"
+            style="--grid-template-columns\@1024: 1fr;"
+          >
+            <label for="angle-rotated-ratio-per-frame">
+              Angle Rotated Ratio Per Frame:
+            </label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="angle-rotated-ratio-per-frame-lower-bound"
+                name="angle-rotated-ratio-per-frame-lower-bound"
+                class="c-slider-input__input-lower"
+                step="1"
+                value="0"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="angle-rotated-ratio-per-frame"
+                  name="angle-rotated-ratio-per-frame"
+                  class="c-slider-input__input-range"
+                  step="1"
+                  value="20"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="angle-rotated-ratio-per-frame-upper-bound"
+                name="angle-rotated-ratio-per-frame-upper-bound"
                 class="c-slider-input__input-upper"
                 step="1"
                 value="100"
