@@ -1364,30 +1364,30 @@
 
         <fieldset class="c-form__fieldset">
           <legend class="c-form__fieldset-legend">
-            Camera Positions
+            Camera
           </legend>
 
           <div class="c-form__input-group">
-            <label for="camera-position-x">X:</label>
+            <label for="camera-phi">Phi:</label>
 
             <div class="c-slider-input u-flex-1">
               <input
                 type="number"
-                id="camera-position-x-lower-bound"
-                name="camera-position-x-lower-bound"
+                id="camera-phi-lower-bound"
+                name="camera-phi-lower-bound"
                 class="c-slider-input__input-lower"
-                step="1"
-                value="-20"
+                step="0.001"
+                value="-3"
               >
 
               <div class="c-slider-input__input-range-container">
                 <input
                   type="range"
-                  id="camera-position-x"
-                  name="camera-position-x"
+                  id="camera-phi"
+                  name="camera-phi"
                   class="c-slider-input__input-range"
-                  step="1"
-                  value="0"
+                  step="0.001"
+                  value="1.3"
                 >
 
                 <div class="c-slider-input__input-range-value">
@@ -1397,36 +1397,37 @@
 
               <input
                 type="number"
-                id="camera-position-x-upper-bound"
-                name="camera-position-x-upper-bound"
+                id="camera-phi-upper-bound"
+                name="camera-phi-upper-bound"
                 class="c-slider-input__input-upper"
-                step="1"
-                value="20"
+                step="0.001"
+                value="3"
               >
             </div>
           </div>
 
           <div class="c-form__input-group">
-            <label for="camera-position-y">Y:</label>
+            <label for="camera-theta">Theta:</label>
 
             <div class="c-slider-input u-flex-1">
               <input
                 type="number"
-                id="camera-position-y-lower-bound"
-                name="camera-position-y-lower-bound"
+                id="camera-theta-lower-bound"
+                name="camera-theta-lower-bound"
                 class="c-slider-input__input-lower"
-                step="1"
-                value="-20"
+                step="0.001"
+                value="-3"
               >
 
               <div class="c-slider-input__input-range-container">
                 <input
                   type="range"
-                  id="camera-position-y"
-                  name="camera-position-y"
+                  id="camera-theta"
+                  name="camera-theta"
                   class="c-slider-input__input-range"
-                  step="1"
-                  value="0"
+                  step="0.001"
+                  min="-3"
+                  value="1.5"
                 >
 
                 <div class="c-slider-input__input-range-value">
@@ -1436,23 +1437,62 @@
 
               <input
                 type="number"
-                id="camera-position-y-upper-bound"
-                name="camera-position-y-upper-bound"
+                id="camera-theta-upper-bound"
+                name="camera-theta-upper-bound"
                 class="c-slider-input__input-upper"
-                step="1"
-                value="20"
+                step="0.001"
+                value="3"
               >
             </div>
           </div>
 
           <div class="c-form__input-group">
-            <label for="camera-position-z">Z:</label>
+            <label for="camera-sensitivity">Sensitivity:</label>
 
             <div class="c-slider-input u-flex-1">
               <input
                 type="number"
-                id="camera-position-z-lower-bound"
-                name="camera-position-z-lower-bound"
+                id="camera-sensitivity-lower-bound"
+                name="camera-sensitivity-lower-bound"
+                class="c-slider-input__input-lower"
+                step="0.001"
+                value="0.001"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-sensitivity"
+                  name="camera-sensitivity"
+                  class="c-slider-input__input-range"
+                  step="0.001"
+                  value="0.01"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-sensitivity-upper-bound"
+                name="camera-sensitivity-upper-bound"
+                class="c-slider-input__input-upper"
+                step="0.001"
+                value="1"
+              >
+            </div>
+          </div>
+
+          <div class="c-form__input-group">
+            <label for="camera-distance">Distance:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-distance-lower-bound"
+                name="camera-distance-lower-bound"
                 class="c-slider-input__input-lower"
                 step="1"
                 value="-20"
@@ -1461,12 +1501,11 @@
               <div class="c-slider-input__input-range-container">
                 <input
                   type="range"
-                  id="camera-position-z"
-                  name="camera-position-z"
+                  id="camera-distance"
+                  name="camera-distance"
                   class="c-slider-input__input-range"
                   step="1"
-                  min="-100"
-                  max="100"
+                  min="-20"
                   value="-8"
                 >
 
@@ -1477,8 +1516,8 @@
 
               <input
                 type="number"
-                id="camera-position-z-upper-bound"
-                name="camera-position-z-upper-bound"
+                id="camera-distance-upper-bound"
+                name="camera-distance-upper-bound"
                 class="c-slider-input__input-upper"
                 step="1"
                 value="20"

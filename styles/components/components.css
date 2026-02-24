@@ -230,6 +230,11 @@
     }
   }
 
+  .c-main__canvas--focus {
+    outline: 2px solid var(--color-primary);
+    cursor: grab;
+  }
+
   .c-slider-input {
     display: flex;
     align-items: center;

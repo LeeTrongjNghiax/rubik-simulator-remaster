@@ -27,6 +27,13 @@ import degreeToRadian from "../../../scripts/utilities/maths/degree-to-radian.js
 let isRotating = false;
 let rotateInterval;
 let loopTimeout;
+let isMouseDown = false;
+const orbit = {
+  radius: 8,
+  theta: -1.65,
+  phi: 1.990796326794896,
+  sensitivity: 0.05,
+}
 
 const createTwistyPuzzle = async (form) => {
   clearInterval(rotateInterval);
@@ -236,17 +243,26 @@ const createTwistyPuzzle = async (form) => {
 
   if (!orientationZ) throw new Error(`Orientation Z not found`);
 
-  const cameraPositionX = document.querySelector(`#camera-position-x`);
+  const cameraDistance = document.querySelector(`#camera-distance`);
 
-  if (!cameraPositionX) throw new Error(`Camera Position X not found`);
+  if (!cameraDistance) throw new Error(`Camera Distance not found`);
 
-  const cameraPositionY = document.querySelector(`#camera-position-y`);
+  const cameraSensitivity = document.querySelector(`#camera-sensitivity`);
 
-  if (!cameraPositionY) throw new Error(`Camera Position Y not found`);
+  if (!cameraSensitivity) throw new Error(`Camera Sensitivity not found`);
 
-  const cameraPositionZ = document.querySelector(`#camera-position-z`);
+  const cameraPhi = document.querySelector(`#camera-phi`);
 
-  if (!cameraPositionZ) throw new Error(`Camera Position Z not found`);
+  if (!cameraPhi) throw new Error(`Camera Phi not found`);
+
+  const cameraTheta = document.querySelector(`#camera-theta`);
+
+  if (!cameraTheta) throw new Error(`Camera Theta not found`);
+
+  orbit.sensitivity = +cameraSensitivity.value;
+  orbit.radius = +cameraDistance.value;
+  orbit.phi = +cameraPhi.value;
+  orbit.theta = +cameraTheta.value;
 
   const fieldOfView = document.querySelector(`#field-of-view`);
 
@@ -318,13 +334,17 @@ const createTwistyPuzzle = async (form) => {
       matProjUniformLocation,
     } = getUniformsInShader(gl, shaderProgram);
 
+    const x = orbit.radius * Math.sin(orbit.phi) * Math.cos(orbit.theta);
+    const y = orbit.radius * Math.cos(orbit.phi);
+    const z = orbit.radius * Math.sin(orbit.phi) * Math.sin(orbit.theta);
+
     const { matWorld, matView, matProjection } = createSupportMatrix({
       orientationX: +orientationX.value ?? 0,
       orientationY: +orientationY.value ?? 0,
       orientationZ: +orientationZ.value ?? 0,
-      cameraPositionX: +cameraPositionX.value ?? 0,
-      cameraPositionY: +cameraPositionY.value ?? 0,
-      cameraPositionZ: +cameraPositionZ.value ?? -30,
+      cameraPositionX: x,
+      cameraPositionY: y,
+      cameraPositionZ: z,
       cameraLookAtX: +cameraLookAtX.value ?? 0,
       cameraLookAtY: +cameraLookAtY.value ?? 1,
       cameraLookAtZ: +cameraLookAtZ.value ?? 0,
@@ -398,7 +418,15 @@ const createTwistyPuzzle = async (form) => {
     );
   }
 
-  if (vertexIndices.length > 0) draw();
+  if (vertexIndices.length > 0) {
+    resetWebGL({
+      webGLContext: gl,
+      canvas,
+      backgroundColor: backgroundColor.value ? hexColorToUnitColor(backgroundColor.value) : [0, 0, 0],
+    });
+
+    draw();
+  }
 
   const controllerContainer = document.querySelector(`.c-controller-container`);
 
@@ -567,17 +595,30 @@ const createTwistyPuzzle = async (form) => {
     draw();
   });
 
-  cameraPositionX.addEventListener(`input`, () => {
+  cameraSensitivity.addEventListener(`input`, () => {
+    orbit.sensitivity = cameraSensitivity.value;
+
     updateMatrix();
     draw();
   });
 
-  cameraPositionY.addEventListener(`input`, () => {
+  cameraDistance.addEventListener(`input`, () => {
+    orbit.radius = cameraDistance.value;
+
     updateMatrix();
     draw();
   });
 
-  cameraPositionZ.addEventListener(`input`, () => {
+  cameraPhi.addEventListener(`input`, () => {
+    orbit.phi = cameraPhi.value;
+
+    updateMatrix();
+    draw();
+  });
+
+  cameraTheta.addEventListener(`input`, () => {
+    orbit.theta = cameraTheta.value;
+
     updateMatrix();
     draw();
   });
@@ -649,6 +690,33 @@ const createTwistyPuzzle = async (form) => {
   smoothRotationPerFrame.addEventListener(`input`, () => {
     updateMatrix();
   });
+
+  canvas.addEventListener(`mousedown`, () => {
+    isMouseDown = true;
+    canvas.classList.add(`c-main__canvas--focus`);
+  });
+
+  canvas.addEventListener(`mouseup`, () => {
+    isMouseDown = false;
+    canvas.classList.remove(`c-main__canvas--focus`);
+  });
+
+  canvas.addEventListener(`mousemove`, (event) => {
+    if (isMouseDown) {
+      orbit.theta += event.movementX * orbit.sensitivity;
+
+      orbit.phi += event.movementY * orbit.sensitivity;
+      orbit.phi = Math.max(0.01, Math.min(Math.PI - 0.01, orbit.phi));
+
+      updateMatrix();
+      draw();
+    }
+  });
+
+  canvas.addEventListener('wheel', (e) => {
+    orbit.radius += e.deltaY * 0.01;
+    orbit.radius = Math.max(1, orbit.radius);
+  });
 }
 
 const initiateForm = () => {
@@ -667,17 +735,11 @@ const initiateForm = () => {
 
   if (!loadRubikFormPreset) throw new Error(`Load rubik form preset not found`);
 
-  const cameraPositionX = document.querySelector(`#camera-position-x`);
+  const cameraDistance = document.querySelector(`#camera-distance`);
 
-  if (!cameraPositionX) throw new Error(`Camera Position X not found`);
+  if (!cameraDistance) throw new Error(`Camera Distance not found`);
 
-  const cameraPositionY = document.querySelector(`#camera-position-y`);
-
-  if (!cameraPositionY) throw new Error(`Camera Position Y not found`);
-
-  const cameraPositionZ = document.querySelector(`#camera-position-z`);
-
-  if (!cameraPositionZ) throw new Error(`Camera Position Z not found`);
+  orbit.radius = Math.abs(+cameraDistance.value);
 
   loadRubikFormPreset.addEventListener(`change`, (event) => {
     const preset = event.target.value;
@@ -696,9 +758,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -5;
+        cameraDistance.value = -5;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -721,9 +781,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -10;
+        cameraDistance.value = -10;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -746,9 +804,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -12;
+        cameraDistance.value = -12;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -771,9 +827,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -14;
+        cameraDistance.value = -14;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -796,9 +850,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -16;
+        cameraDistance.value = -16;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -821,9 +873,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -8;
+        cameraDistance.value = -8;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -846,9 +896,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -8;
+        cameraDistance.value = -8;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -871,9 +919,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0.5;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -8;
+        cameraDistance.value = -8;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -892,9 +938,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -10;
+        cameraDistance.value = -10;
 
         form.querySelector(`#sticker-color-up`).value = `#c0c0c0`;
         form.querySelector(`#sticker-color-down`).value = `#c0c0c0`;
@@ -918,9 +962,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -8;
+        cameraDistance.value = -8;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
@@ -946,9 +988,7 @@ const initiateForm = () => {
         form.querySelector(`#sticker-container-rotation-y`).value = 0;
         form.querySelector(`#sticker-container-rotation-z`).value = 0;
 
-        cameraPositionX.value = 0;
-        cameraPositionY.value = 0;
-        cameraPositionZ.value = -8;
+        cameraDistance.value = -8;
 
         form.querySelector(`#sticker-color-up`).value = `#ffffff`;
         form.querySelector(`#sticker-color-down`).value = `#ffff00`;
