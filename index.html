@@ -166,7 +166,13 @@
         </div>
       </fieldset>
 
-      <div class="c-form__input-group">
+      <div
+        class="c-form__input-group"
+        style="
+          --grid-template-columns: 1fr;
+          --grid-template-columns\@1024: 1fr auto;
+        "
+      >
         <label for="load-rubik-form-preset">Load Rubik Form Preset</label>
 
         <select
@@ -1368,13 +1374,13 @@
           </legend>
 
           <div class="c-form__input-group">
-            <label for="camera-phi">Phi:</label>
+            <label for="camera-polar-angle">Polar Angle:</label>
 
             <div class="c-slider-input u-flex-1">
               <input
                 type="number"
-                id="camera-phi-lower-bound"
-                name="camera-phi-lower-bound"
+                id="camera-polar-angle-lower-bound"
+                name="camera-polar-angle-lower-bound"
                 class="c-slider-input__input-lower"
                 step="0.001"
                 value="-3"
@@ -1383,8 +1389,8 @@
               <div class="c-slider-input__input-range-container">
                 <input
                   type="range"
-                  id="camera-phi"
-                  name="camera-phi"
+                  id="camera-polar-angle"
+                  name="camera-polar-angle"
                   class="c-slider-input__input-range"
                   step="0.001"
                   value="1.3"
@@ -1397,8 +1403,8 @@
 
               <input
                 type="number"
-                id="camera-phi-upper-bound"
-                name="camera-phi-upper-bound"
+                id="camera-polar-angle-upper-bound"
+                name="camera-polar-angle-upper-bound"
                 class="c-slider-input__input-upper"
                 step="0.001"
                 value="3"
@@ -1407,13 +1413,13 @@
           </div>
 
           <div class="c-form__input-group">
-            <label for="camera-theta">Theta:</label>
+            <label for="camera-azimuthal-angle">Azimuthal Angle:</label>
 
             <div class="c-slider-input u-flex-1">
               <input
                 type="number"
-                id="camera-theta-lower-bound"
-                name="camera-theta-lower-bound"
+                id="camera-azimuthal-angle-lower-bound"
+                name="camera-azimuthal-angle-lower-bound"
                 class="c-slider-input__input-lower"
                 step="0.001"
                 value="-3"
@@ -1422,8 +1428,8 @@
               <div class="c-slider-input__input-range-container">
                 <input
                   type="range"
-                  id="camera-theta"
-                  name="camera-theta"
+                  id="camera-azimuthal-angle"
+                  name="camera-azimuthal-angle"
                   class="c-slider-input__input-range"
                   step="0.001"
                   min="-3"
@@ -1437,8 +1443,8 @@
 
               <input
                 type="number"
-                id="camera-theta-upper-bound"
-                name="camera-theta-upper-bound"
+                id="camera-azimuthal-angle-upper-bound"
+                name="camera-azimuthal-angle-upper-bound"
                 class="c-slider-input__input-upper"
                 step="0.001"
                 value="3"
@@ -1484,6 +1490,46 @@
               >
             </div>
           </div>
+
+          <div class="c-form__input-group">
+            <label for="camera-zoom-speed">Zoom Speed:</label>
+
+            <div class="c-slider-input u-flex-1">
+              <input
+                type="number"
+                id="camera-zoom-speed-lower-bound"
+                name="camera-zoom-speed-lower-bound"
+                class="c-slider-input__input-lower"
+                step="0.001"
+                value="0.001"
+              >
+
+              <div class="c-slider-input__input-range-container">
+                <input
+                  type="range"
+                  id="camera-zoom-speed"
+                  name="camera-zoom-speed"
+                  class="c-slider-input__input-range"
+                  step="0.001"
+                  value="0.001"
+                >
+
+                <div class="c-slider-input__input-range-value">
+                  -
+                </div>
+              </div>
+
+              <input
+                type="number"
+                id="camera-zoom-speed-upper-bound"
+                name="camera-zoom-speed-upper-bound"
+                class="c-slider-input__input-upper"
+                step="0.001"
+                value="1"
+              >
+            </div>
+          </div>
+
 
           <div class="c-form__input-group">
             <label for="camera-distance">Distance:</label>

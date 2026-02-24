@@ -33,6 +33,7 @@ const orbit = {
   theta: -1.65,
   phi: 1.990796326794896,
   sensitivity: 0.05,
+  zoomSpeed: 1,
 }
 
 const createTwistyPuzzle = async (form) => {
@@ -251,18 +252,23 @@ const createTwistyPuzzle = async (form) => {
 
   if (!cameraSensitivity) throw new Error(`Camera Sensitivity not found`);
 
-  const cameraPhi = document.querySelector(`#camera-phi`);
+  const cameraPolarAngle = document.querySelector(`#camera-polar-angle`);
 
-  if (!cameraPhi) throw new Error(`Camera Phi not found`);
+  if (!cameraPolarAngle) throw new Error(`Camera Polar Angle not found`);
 
-  const cameraTheta = document.querySelector(`#camera-theta`);
+  const cameraAzimuthalAngle = document.querySelector(`#camera-azimuthal-angle`);
 
-  if (!cameraTheta) throw new Error(`Camera Theta not found`);
+  if (!cameraAzimuthalAngle) throw new Error(`Camera Azimuthal Angle not found`);
+
+  const cameraZoomSpeed = document.querySelector(`#camera-zoom-speed`);
+
+  if (!cameraZoomSpeed) throw new Error(`Camera Zoom Speed not found`);
 
   orbit.sensitivity = +cameraSensitivity.value;
   orbit.radius = +cameraDistance.value;
-  orbit.phi = +cameraPhi.value;
-  orbit.theta = +cameraTheta.value;
+  orbit.phi = +cameraPolarAngle.value;
+  orbit.theta = +cameraAzimuthalAngle.value;
+  orbit.zoomSpeed = +cameraZoomSpeed.value;
 
   const fieldOfView = document.querySelector(`#field-of-view`);
 
@@ -609,15 +615,22 @@ const createTwistyPuzzle = async (form) => {
     draw();
   });
 
-  cameraPhi.addEventListener(`input`, () => {
-    orbit.phi = cameraPhi.value;
+  cameraPolarAngle.addEventListener(`input`, () => {
+    orbit.phi = cameraPolarAngle.value;
 
     updateMatrix();
     draw();
   });
 
-  cameraTheta.addEventListener(`input`, () => {
-    orbit.theta = cameraTheta.value;
+  cameraAzimuthalAngle.addEventListener(`input`, () => {
+    orbit.theta = cameraAzimuthalAngle.value;
+
+    updateMatrix();
+    draw();
+  });
+
+  cameraZoomSpeed.addEventListener(`input`, () => {
+    orbit.zoomSpeed = cameraZoomSpeed.value;
 
     updateMatrix();
     draw();
@@ -714,9 +727,9 @@ const createTwistyPuzzle = async (form) => {
   });
 
   canvas.addEventListener('wheel', (e) => {
-    orbit.radius += e.deltaY * 0.01;
+    orbit.radius += e.deltaY * orbit.zoomSpeed;
     orbit.radius = Math.max(1, orbit.radius);
-  });
+  }, { passive: true });
 }
 
 const initiateForm = () => {
