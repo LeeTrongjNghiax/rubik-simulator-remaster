@@ -729,6 +729,7 @@ const createTwistyPuzzle = async (form) => {
   canvas.addEventListener('wheel', (e) => {
     orbit.radius += e.deltaY * orbit.zoomSpeed;
     orbit.radius = Math.max(1, orbit.radius);
+    e.preventDefault();
   }, { passive: true });
 }
 
