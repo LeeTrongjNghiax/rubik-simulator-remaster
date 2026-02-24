@@ -34,7 +34,11 @@ const orbit = {
   phi: 1.990796326794896,
   sensitivity: 0.05,
   zoomSpeed: 1,
+  lastTouchDistance: 0,
 }
+
+let isInteracting = false;
+let lastX, lastY;
 
 const createTwistyPuzzle = async (form) => {
   clearInterval(rotateInterval);
@@ -424,6 +428,32 @@ const createTwistyPuzzle = async (form) => {
     );
   }
 
+  const startInteract = (x, y) => {
+    isInteracting = true;
+    lastX = x;
+    lastY = y;
+  }
+
+  const stopInteract = () => {
+    isInteracting = false;
+    orbit.lastTouchDistance = 0;
+  }
+
+  const handleRotate = (x, y) => {
+    const dx = x - lastX;
+    const dy = y - lastY;
+
+    orbit.theta += dx * orbit.sensitivity;
+    orbit.phi += dy * orbit.sensitivity;
+    orbit.phi = Math.max(0.01, Math.min(Math.PI - 0.01, orbit.phi));
+
+    updateMatrix();
+    draw();
+
+    lastX = x;
+    lastY = y;
+  }
+
   if (vertexIndices.length > 0) {
     resetWebGL({
       webGLContext: gl,
@@ -704,14 +734,24 @@ const createTwistyPuzzle = async (form) => {
     updateMatrix();
   });
 
-  canvas.addEventListener(`mousedown`, () => {
+  canvas.addEventListener(`mousedown`, (e) => {
     isMouseDown = true;
     canvas.classList.add(`c-main__canvas--focus`);
+
+    startInteract(e.clientX, e.clientY);
   });
 
   canvas.addEventListener(`mouseup`, () => {
     isMouseDown = false;
     canvas.classList.remove(`c-main__canvas--focus`);
+
+    stopInteract();
+  });
+
+  canvas.addEventListener(`mousemove`, (e) => {
+    if (isInteracting) {
+      handleRotate(e.clientX, e.clientY);
+    }
   });
 
   canvas.addEventListener(`mousemove`, (event) => {
@@ -720,9 +760,6 @@ const createTwistyPuzzle = async (form) => {
 
       orbit.phi += event.movementY * orbit.sensitivity;
       orbit.phi = Math.max(0.01, Math.min(Math.PI - 0.01, orbit.phi));
-
-      updateMatrix();
-      draw();
     }
   });
 
@@ -730,7 +767,38 @@ const createTwistyPuzzle = async (form) => {
     orbit.radius += e.deltaY * orbit.zoomSpeed;
     orbit.radius = Math.max(1, orbit.radius);
     e.preventDefault();
-  }, { passive: true });
+  }, { passive: false });
+
+  canvas.addEventListener(`touchstart`, (e) => {
+    if (e.touches.length === 1) {
+      startInteract(e.touches[0].clientX, e.touches[0].clientY);
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+      orbit.lastTouchDistance = Math.hypot(dx, dy);
+    }
+  }, { passive: false });
+
+  canvas.addEventListener(`touchmove`, (e) => {
+    e.preventDefault();
+
+    if (e.touches.length === 1 && isInteracting) {
+      handleRotate(e.touches[0].clientX, e.touches[0].clientY);
+    } else if (e.touches.length === 2) {
+      const dx = e.touches[0].clientX - e.touches[1].clientX;
+      const dy = e.touches[0].clientY - e.touches[1].clientY;
+
+      const distance = Math.hypot(dx, dy);
+
+      if (orbit.lastTouchDistance > 0) {
+        const delta = (orbit.lastTouchDistance - distance) * orbit.zoomSpeed;
+        orbit.radius += delta;
+        orbit.radius = Math.max(1, orbit.radius);
+      }
+
+      orbit.lastTouchDistance = distance;
+    }
+  }, { passive: false });
 }
 
 const initiateForm = () => {
