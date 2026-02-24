@@ -3,7 +3,12 @@ const resetWebGL = ({
   canvas,
   backgroundColor = [.1, .1, .1, 0.],
 }) => {
-  webGLContext.clearColor(backgroundColor[0], backgroundColor[1], backgroundColor[2], backgroundColor[3]);
+  webGLContext.clearColor(
+    backgroundColor[0],
+    backgroundColor[1],
+    backgroundColor[2],
+    backgroundColor[3],
+  );
   
   webGLContext.clearDepth(1.);
   webGLContext.viewport(0.0, 0.0, canvas.width, canvas.height);

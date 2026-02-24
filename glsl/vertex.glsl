@@ -1,8 +1,8 @@
 #version 300 es 
 precision highp float;
 
-in vec3 vertPosition; 
-in vec4 vertColor; 
+layout(location = 0) in vec3 vertPosition; 
+layout(location = 1) in vec4 vertColor; 
 
 out lowp vec4 fragColor; 
 

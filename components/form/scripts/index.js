@@ -213,7 +213,7 @@ const createTwistyPuzzle = async (form) => {
 
   addVertexIndicesBufferData(gl, vertexIndices);
 
-  setUpShaderAttribute(gl, shaderProgram);
+  setUpShaderAttribute(gl);
   
   gl.useProgram(shaderProgram);
 
