@@ -40,7 +40,19 @@ const orbit = {
 let isInteracting = false;
 let lastX, lastY;
 
-const createTwistyPuzzle = async (form) => {
+let pointSizeUniformLocation;
+let matWorldUniformLocation;
+let matViewUniformLocation;
+let matProjUniformLocation;
+
+let axisVectorUniformLocation;
+let radUniformLocation;
+let planeAUniformLocation;
+let planeBUniformLocation;
+
+let gl;
+
+const createTwistyPuzzle = async (form, canvas, gl) => {
   clearInterval(rotateInterval);
   cancelAnimationFrame(loopTimeout);
   isRotating = false;
@@ -48,12 +60,6 @@ const createTwistyPuzzle = async (form) => {
   const formData = new FormData(form);
 
   if (!formData) throw new Error(`Form data not found`);
-
-  const canvas = document.querySelector(`.c-main__canvas`);
-
-  if (!canvas) throw new Error(`Canvas not found`);
-
-  const gl = createWebGLRenderingContext(canvas);
 
   const backgroundColor = document.querySelector(`#background-color`);
 
@@ -230,11 +236,16 @@ const createTwistyPuzzle = async (form) => {
   gl.useProgram(shaderProgram);
 
   const {
-    axisVectorUniformLocation,
-    radUniformLocation,
-    planeAUniformLocation,
-    planeBUniformLocation,
+    axisVectorUniformLocation: newAxisVectorUniformLocation,
+    radUniformLocation: newRadUniformLocation,
+    planeAUniformLocation: newPlaneAUniformLocation,
+    planeBUniformLocation: newPlaneBUniformLocation,
   } = getUniformsInShader(gl, shaderProgram);
+
+  axisVectorUniformLocation = newAxisVectorUniformLocation;
+  radUniformLocation = newRadUniformLocation;
+  planeAUniformLocation = newPlaneAUniformLocation;
+  planeBUniformLocation = newPlaneBUniformLocation;
 
   const orientationX = document.querySelector(`#cubie-orientation-x`);
 
@@ -338,11 +349,16 @@ const createTwistyPuzzle = async (form) => {
     smoothRotationPerFrameValue = +smoothRotationPerFrame.value;
 
     const {
-      pointSizeUniformLocation,
-      matWorldUniformLocation,
-      matViewUniformLocation,
-      matProjUniformLocation,
+      pointSizeUniformLocation: newPointSizeUniformLocation,
+      matWorldUniformLocation: newMatWorldUniformLocation,
+      matViewUniformLocation: newMatViewUniformLocation,
+      matProjUniformLocation: newMatProjUniformLocation,
     } = getUniformsInShader(gl, shaderProgram);
+
+    pointSizeUniformLocation = newPointSizeUniformLocation;
+    matWorldUniformLocation = newMatWorldUniformLocation;
+    matViewUniformLocation = newMatViewUniformLocation;
+    matProjUniformLocation = newMatProjUniformLocation;
 
     const x = orbit.radius * Math.sin(orbit.phi) * Math.cos(orbit.theta);
     const y = orbit.radius * Math.cos(orbit.phi);
@@ -373,10 +389,10 @@ const createTwistyPuzzle = async (form) => {
       matView,
       matProj: matProjection,
       pointSize: +pointSize.value ?? 1,
-      matWorldUniformLocation,
-      matViewUniformLocation,
-      matProjUniformLocation,
-      pointSizeUniformLocation,
+      matWorldUniformLocation: matWorldUniformLocation,
+      matViewUniformLocation: matViewUniformLocation,
+      matProjUniformLocation: matProjUniformLocation,
+      pointSizeUniformLocation: pointSizeUniformLocation,
     });
   }
 
@@ -806,9 +822,15 @@ const initiateForm = () => {
 
   if (!form) throw new Error(`Form not found`);
 
+  const canvas = document.querySelector(`.c-main__canvas`);
+
+  if (!canvas) throw new Error(`Canvas not found`);
+
+  gl = createWebGLRenderingContext(canvas);
+
   const handleCreateTwistyPuzzle = (event) => {
     event.preventDefault();
-    createTwistyPuzzle(form);
+    createTwistyPuzzle(form, canvas, gl);
   }
 
   form.addEventListener(`submit`, handleCreateTwistyPuzzle);
@@ -1082,7 +1104,7 @@ const initiateForm = () => {
         break;
     }
 
-    createTwistyPuzzle(form);
+    createTwistyPuzzle(form, canvas, gl);
   });
 
   const randomRubikFormPresetIndex = getRandomInteger(0, loadRubikFormPreset.options.length - 1);
